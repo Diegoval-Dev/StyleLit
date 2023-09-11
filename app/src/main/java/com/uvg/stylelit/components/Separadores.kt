@@ -13,23 +13,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import com.uvg.stylelit.ui.theme.DarkBlue
+import com.uvg.stylelit.ui.theme.White
 
 
 @Composable
-fun Componentes() {
+fun TituloCategoriaSeparador(text: String) {
     Box(
         modifier = Modifier
             .width(420.dp)
             .height(38.dp)
-            .background(Color(0XFF2B4E77))
+            .background(DarkBlue)
             .border(20.dp, Color.Transparent, RoundedCornerShape(20.dp))
     ) {
         Text(
-            text = "Camisas",
+            text = text,
             style = TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontSize = 20.sp,
-                color = Color(0XFFFFFFFF),
+                color = White,
             ),
             modifier = Modifier
                 .padding(6.dp)
@@ -41,6 +43,6 @@ fun Componentes() {
 @Composable
 fun RectanguloConTextoPreview() {
     MaterialTheme {
-        Componentes()
+        TituloCategoriaSeparador(text = "Camisas")
     }
 }

@@ -53,6 +53,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.uvg.stylelit.R
 import com.uvg.stylelit.routing.routingPages
+import com.uvg.stylelit.screens.MensCategoryBody
+import com.uvg.stylelit.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.theme.DarkSlateBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import kotlinx.coroutines.launch
@@ -65,7 +67,9 @@ fun MainLayout(navController: NavController, content: @Composable () -> Unit, on
         topBar = {
             TopAppBar(
                 title = {
-                    //Aqui va el titulo que colocaremos
+                    Text(
+                        text = "StyleLit"
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = {
@@ -92,9 +96,9 @@ fun sidebarLeft(navController: NavController){
     data class DrawerItem(val icon: ImageVector, val route: String, val label: String)
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Perfil"),
-        DrawerItem(Icons.Default.Place, routingPages.storesPages, "Configuración"),
-        DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Contactos"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
+        DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
         DrawerItem(Icons.Default.Settings, routingPages.configurationPages, "Configuración")
 
     )
@@ -142,7 +146,7 @@ fun sidebarLeft(navController: NavController){
 
                 composable(routingPages.categoryPages) {
                     CommonLayout(drawerState) {
-                        "AQui ira la pagina de categorias general"
+                        MensCategoryScreen(navController)
                     }
                 }
 
@@ -194,7 +198,7 @@ fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
                         .padding(top = 10.dp))
             }
             Text(
-                text = "Titulo de la app",
+                text = "StyLit",
                 fontSize = 24.sp,
                 fontWeight = FontWeight(600),
                 modifier = Modifier.padding(vertical = 15.dp, horizontal = 20.dp)

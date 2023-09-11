@@ -14,44 +14,46 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.uvg.stylelit.ui.theme.Cyan
+import com.uvg.stylelit.ui.theme.White
 
 @Composable
-fun TituloPrincipal() {
+fun TituloPrincipal(text: String, color: Color) {
     Text(
-        text = "MEN'S",
+        text = text,
         style = TextStyle(
             fontSize = 40.sp,
-            color = Color(0XFFFFFFFF),
+            color = White,
             fontFamily = FontFamily.SansSerif
         ),
         modifier = Modifier
-            .width(187.dp)
+            .width(140.dp)
             .height(45.dp)
             .offset(13.dp, 1.dp)
     )
 
     Text(
-        text = "MEN'S",
+        text = text,
         style = TextStyle(
             fontFamily = FontFamily.SansSerif,
             fontSize = 40.sp,
-            color = Color(0XFF0C95C0)
+            color = color
         ),
         modifier = Modifier
-            .width(187.dp)
+            .width(140.dp)
             .height(45.dp)
             .offset(12.dp, 1.dp)
     )
 
     Text(
-        text = "MEN'S",
+        text = text,
         style = TextStyle(
             fontFamily = FontFamily.SansSerif,
             fontSize = 40.sp,
-            color = Color(0XFFFFFFFF),
+            color = White,
         ),
         modifier = Modifier
-            .width(187.dp)
+            .width(140.dp)
             .height(45.dp)
             .offset(10.dp, 1.dp)
     )
@@ -62,6 +64,6 @@ fun TituloPrincipal() {
 @Composable
 fun TitloPrinPreview() {
     MaterialTheme {
-        TituloPrincipal()
+        TituloPrincipal(text = "MEN'S", color = Cyan)
     }
 }

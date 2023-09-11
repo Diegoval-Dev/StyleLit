@@ -1,5 +1,6 @@
 package com.uvg.stylelit.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -25,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uvg.stylelit.ui.theme.StyleLitTheme
 import com.uvg.stylelit.R
+import com.uvg.stylelit.ui.theme.DarkSlateBlue
+import com.uvg.stylelit.ui.theme.White
 
 
 /**
@@ -34,7 +38,8 @@ import com.uvg.stylelit.R
  * @param text El texto que se mostrará en la tarjeta.
  */
 @Composable
-fun CardClothe(painter: Painter, text: String){
+fun CardClothe(@DrawableRes id: Int, text: String){
+    val image = painterResource(id = id)
     Card {
         Box(
             modifier = Modifier
@@ -42,24 +47,25 @@ fun CardClothe(painter: Painter, text: String){
                 .height(160.dp)
         ){
             Image(
-                painter = painter,
+                painter = image,
                 contentDescription = null,
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
             Box(
                 modifier = Modifier
                     .width(88.dp)
                     .height(121.dp)
                     .padding(top = 100.dp)
-                    .background(Color(0xFF1D2B3C), RoundedCornerShape(0.dp, 20.dp, 20.dp, 0.dp))
+                    .background(DarkSlateBlue, RoundedCornerShape(0.dp, 20.dp, 20.dp, 0.dp))
             ) {
                 Text(
                     text = text,
                     modifier = Modifier
                         .align(Alignment.Center)
                         .fillMaxWidth(),
-                    color = Color(0xffffffff),
+                    color = White,
                     textAlign = TextAlign.Center,
                     fontSize = 12.sp,
                     fontWeight = FontWeight(300),
@@ -74,6 +80,6 @@ fun CardClothe(painter: Painter, text: String){
 @Composable
 fun Preview() {
     StyleLitTheme {
-        CardClothe(painter = painterResource(id = R.drawable.ic_launcher_background), text = "Prueba")
+        CardClothe(id = R.drawable.ic_launcher_background, text = "Prueba")
     }
 }
