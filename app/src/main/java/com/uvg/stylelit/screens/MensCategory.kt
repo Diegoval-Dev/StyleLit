@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -66,29 +67,36 @@ fun MensCategoryBody(){
         }
     }
 
-    TituloCategoriaSeparador(text = "Camisas")
-
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 160.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(all = 10.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            //.verticalScroll(state = rememberScrollState())
     ){
-        items(camisas) { card ->
-            CardClothe(id = card.id, text = card.text)
+
+        TituloCategoriaSeparador(text = "Camisas")
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = 160.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(all = 10.dp)
+        ){
+            items(camisas) { card ->
+                CardClothe(id = card.id, text = card.text)
+            }
         }
-    }
 
-    TituloCategoriaSeparador(text = "Pantalones")
+        TituloCategoriaSeparador(text = "Pantalones")
 
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 160.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(all = 10.dp)
-    ){
-        items(pantalones) { card ->
-            CardClothe(id = card.id, text = card.text)
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = 160.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(all = 10.dp)
+        ){
+            items(pantalones) { card ->
+                CardClothe(id = card.id, text = card.text)
+            }
         }
     }
 

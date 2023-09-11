@@ -21,7 +21,7 @@ import com.uvg.stylelit.ui.theme.White
 fun TituloCategoriaSeparador(text: String) {
     Box(
         modifier = Modifier
-            .width(420.dp)
+            .fillMaxWidth()
             .height(38.dp)
             .background(DarkBlue)
             .border(20.dp, Color.Transparent, RoundedCornerShape(20.dp))

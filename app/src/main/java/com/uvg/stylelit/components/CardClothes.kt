@@ -43,7 +43,6 @@ fun CardClothe(@DrawableRes id: Int, text: String){
     Card {
         Box(
             modifier = Modifier
-                .width(160.dp)
                 .height(160.dp)
         ){
             Image(
