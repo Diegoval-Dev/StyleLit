@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridItemInfo
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -17,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,25 +57,19 @@ val pantalones = mutableListOf<Card>(
 )
 
 @Composable
-fun MensCategoryBody(){
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(PrimaryColorBlue)
-            .padding(top = 5.dp, bottom = 10.dp),
-        horizontalArrangement = Arrangement.Center
-    ){
-        Box(){
+fun MensCategoryBody() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(PrimaryColorBlue)
+                .padding(top = 5.dp, bottom = 10.dp),
+            contentAlignment = Alignment.Center
+        ) {
             TituloPrincipal(text = "MEN'S", color = Cyan)
         }
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            //.verticalScroll(state = rememberScrollState())
-    ){
-
         TituloCategoriaSeparador(text = "Camisas")
 
         LazyVerticalGrid(
@@ -80,11 +77,17 @@ fun MensCategoryBody(){
             verticalArrangement = Arrangement.spacedBy(10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(all = 10.dp)
-        ){
+        ) {
             items(camisas) { card ->
                 CardClothe(id = card.id, text = card.text)
             }
         }
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(16.dp)
+        )
 
         TituloCategoriaSeparador(text = "Pantalones")
 
@@ -93,13 +96,12 @@ fun MensCategoryBody(){
             verticalArrangement = Arrangement.spacedBy(10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(all = 10.dp)
-        ){
+        ) {
             items(pantalones) { card ->
                 CardClothe(id = card.id, text = card.text)
             }
         }
     }
-
 }
 
 
