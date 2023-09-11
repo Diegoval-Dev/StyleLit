@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -64,50 +65,35 @@ fun MensCategoryBody(){
             TituloPrincipal(text = "MEN'S", color = Cyan)
         }
     }
-    LazyColumn(){
-        item{
-            TituloCategoriaSeparador(text = "Camisas")
-        }
-        item{
-            CamisasGrid()
-        }
-        item {
-            TituloCategoriaSeparador(text = "Pantalones")
-        }
-        item{
-            PantalonesGrid()
-        }
-    }
 
+    TituloCategoriaSeparador(text = "Camisas")
 
-
-}
-
-@Composable
-fun CamisasGrid(){
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 160.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(all = 10.dp)
     ){
         items(camisas) { card ->
             CardClothe(id = card.id, text = card.text)
         }
     }
-}
 
-@Composable
-fun PantalonesGrid(){
+    TituloCategoriaSeparador(text = "Pantalones")
+
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 160.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(all = 10.dp)
     ){
         items(pantalones) { card ->
             CardClothe(id = card.id, text = card.text)
         }
     }
+
 }
+
 
 
 
