@@ -40,12 +40,16 @@ fun MensCategoryScreen(navController: NavController){
 }
 
 val camisas = mutableListOf<Card>(
-    Card(id = R.drawable.c__1_, text = "Camisa 1"),
-    Card(id = R.drawable.c__2_, text = "Camisa 2"),
-    Card(id = R.drawable.c__3_, text = "Camisa 3"),
-    Card(id = R.drawable.c__4_, text = "Camisa 4"),
-    Card(id = R.drawable.c__5_, text = "Camisa 5"),
-    Card(id = R.drawable.c__6_, text = "Camisa 6")
+    Card(id = R.drawable.c__1_, text = "P. Larga"),
+    Card(id = R.drawable.c__2_, text = "C. Largas"),
+    Card(id = R.drawable.c__3_, text = "C. Corta"),
+    Card(id = R.drawable.c__4_, text = "Playeras"),
+    Card(id = R.drawable.c__8_, text = "Dibujos"),
+    Card(id = R.drawable.c__7_, text = "Deportiva"),
+    Card(id = R.drawable.c__5_, text = "Sin Mangas"),
+    Card(id = R.drawable.c__6_, text = "Cuadros"),
+    Card(id= R.drawable.c__9_, text = "Holgadas"),
+    Card(id= R.drawable.c__10_, text = "P. Sin Manga")
 )
 val pantalones = mutableListOf<Card>(
     Card(id = R.drawable.p__1_, text = "Pantalon 1"),
