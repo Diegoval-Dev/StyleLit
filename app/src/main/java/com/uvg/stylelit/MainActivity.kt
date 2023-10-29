@@ -4,11 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.laboratorio4.sidebarLeft
-import com.uvg.stylelit.components.CardClothe
 import com.uvg.stylelit.screens.auth.welcomeScreen
 import com.uvg.stylelit.ui.theme.StyleLitTheme
 

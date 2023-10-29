@@ -1,6 +1,5 @@
 package com.uvg.stylelit.components
 
-import android.os.Bundle
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width

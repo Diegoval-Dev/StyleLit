@@ -1,4 +1,4 @@
-package com.uvg.stylelit.data
+package com.uvg.stylelit.data.networking
 
 import androidx.annotation.DrawableRes
 

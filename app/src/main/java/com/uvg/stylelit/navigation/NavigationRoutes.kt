@@ -1,4 +1,4 @@
-package com.uvg.stylelit.routing
+package com.uvg.stylelit.navigation
 
 //Aqui iran todas las pantallas que tendremos por separado
 object routingPages {
