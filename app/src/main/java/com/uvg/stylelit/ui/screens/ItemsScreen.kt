@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
 import com.uvg.stylelit.components.CardClothe
@@ -28,27 +29,17 @@ import com.uvg.stylelit.ui.theme.Cyan
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.StyleLitTheme
+import com.uvg.stylelit.ui.viewModels.ItemsViewModel
+
 
 @Composable
 fun ItemsScreen(navController: NavController,category: String){
     ItemsBody(navController = navController, category = category)
 }
 
-val camisas = mutableListOf<Card>(
-    Card(id = R.drawable.c__1_, text = "P. Larga"),
-    Card(id = R.drawable.c__2_, text = "C. Largas"),
-    Card(id = R.drawable.c__3_, text = "C. Corta"),
-    Card(id = R.drawable.c__4_, text = "Playeras"),
-    Card(id = R.drawable.c__8_, text = "Dibujos"),
-    Card(id = R.drawable.c__7_, text = "Deportiva"),
-    Card(id = R.drawable.c__5_, text = "Sin Mangas"),
-    Card(id = R.drawable.c__6_, text = "Cuadros"),
-    Card(id= R.drawable.c__9_, text = "Holgadas"),
-    Card(id= R.drawable.c__10_, text = "P. Sin Manga")
-)
-
 @Composable
-fun ItemsBody(navController: NavController,category: String) {
+fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavController, category: String) {
+    viewModel.getClothes()
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -69,7 +60,7 @@ fun ItemsBody(navController: NavController,category: String) {
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(all = 10.dp)
         ) {
-            items(camisas) { card ->
+            items(viewModel.ItemsUiState.items) { card ->
                 CardClothe(id = card.id, text = card.text)
             }
         }
