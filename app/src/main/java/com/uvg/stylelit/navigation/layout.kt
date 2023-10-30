@@ -45,8 +45,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.uvg.stylelit.R
+import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.navigation.routingPages
-import com.uvg.stylelit.screens.MensCategoryScreen
+import com.uvg.stylelit.screens.ItemsScreen
+import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -154,6 +156,12 @@ fun sidebarLeft(navController: NavController){
                 composable(routingPages.configurationPages){
                     CommonLayout(drawerState = drawerState) {
                         "pagina de configuración"
+                    }
+                }
+
+                composable(route = NavigationState.Cloth.route + "/{category}") { backstackEntry ->
+                    CommonLayout(drawerState = drawerState) {
+                        ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
                     }
                 }
             }

@@ -25,12 +25,13 @@ import com.uvg.stylelit.components.TituloCategoriaSeparador
 import com.uvg.stylelit.components.TituloPrincipal
 import com.uvg.stylelit.data.networking.Card
 import com.uvg.stylelit.ui.theme.Cyan
+import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.StyleLitTheme
 
 @Composable
-fun MensCategoryScreen(navController: NavController){
-    MensCategoryBody()
+fun ItemsScreen(navController: NavController,category: String){
+    ItemsBody(navController = navController, category = category)
 }
 
 val camisas = mutableListOf<Card>(
@@ -45,17 +46,9 @@ val camisas = mutableListOf<Card>(
     Card(id= R.drawable.c__9_, text = "Holgadas"),
     Card(id= R.drawable.c__10_, text = "P. Sin Manga")
 )
-val pantalones = mutableListOf<Card>(
-    Card(id = R.drawable.p__1_, text = "Pantalon 1"),
-    Card(id = R.drawable.p__2_, text = "Pantalon 2"),
-    Card(id = R.drawable.p__3_, text = "Pantalon 3"),
-    Card(id = R.drawable.p__4_, text = "Pantalon 4"),
-    Card(id = R.drawable.p__5_, text = "Pantalon 5"),
-    Card(id = R.drawable.p__6_, text = "Pantalon 6"),
-)
 
 @Composable
-fun MensCategoryBody() {
+fun ItemsBody(navController: NavController,category: String) {
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -68,7 +61,7 @@ fun MensCategoryBody() {
         ) {
             TituloPrincipal(text = "MEN'S", color = Cyan)
         }
-        TituloCategoriaSeparador(text = "Camisas")
+        TituloCategoriaSeparador(text = category, color = DarkBlue)
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 160.dp),
@@ -86,30 +79,9 @@ fun MensCategoryBody() {
                 .fillMaxWidth()
                 .height(16.dp)
         )
-
-        TituloCategoriaSeparador(text = "Pantalones")
-
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(all = 10.dp)
-        ) {
-            items(pantalones) { card ->
-                CardClothe(id = card.id, text = card.text)
-            }
-        }
     }
 }
 
 
 
 
-
-@Preview(showBackground = true)
-@Composable
-fun BodyPreview() {
-    StyleLitTheme {
-        MensCategoryBody()
-    }
-}
