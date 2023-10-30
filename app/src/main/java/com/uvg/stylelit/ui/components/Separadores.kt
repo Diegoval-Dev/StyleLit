@@ -18,12 +18,12 @@ import com.uvg.stylelit.ui.theme.White
 
 
 @Composable
-fun TituloCategoriaSeparador(text: String) {
+fun TituloCategoriaSeparador(text: String, color: Color) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(38.dp)
-            .background(DarkBlue)
+            .background(color)
             .border(20.dp, Color.Transparent, RoundedCornerShape(20.dp))
     ) {
         Text(
@@ -43,6 +43,6 @@ fun TituloCategoriaSeparador(text: String) {
 @Composable
 fun RectanguloConTextoPreview() {
     MaterialTheme {
-        TituloCategoriaSeparador(text = "Camisas")
+        TituloCategoriaSeparador(text = "Camisas", DarkBlue)
     }
 }
