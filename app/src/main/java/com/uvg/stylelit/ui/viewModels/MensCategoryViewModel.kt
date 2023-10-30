@@ -14,7 +14,9 @@ class MensCategoryViewModel(private val repository: Repository = Repository()): 
     var MensCategoryUiState by mutableStateOf(MensCategoryUiState(emptyList()))
         private set
 
-    val tempCategories: List<String> =  listOf("Pantalones", "Camisas", "Accesorios")
+    val tempCategories: List<String> =  listOf("Pantalones", "Camisas",
+        "Accesorios", "Chaquetas & Abrigos",
+        "Ropa Deportiva", "Ropa Interior")
     fun getCategories() {
         MensCategoryUiState = MensCategoryUiState(emptyList(), loading = true)
 
