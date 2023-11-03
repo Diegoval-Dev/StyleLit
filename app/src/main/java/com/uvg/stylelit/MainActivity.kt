@@ -15,10 +15,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            val navController = rememberNavController()
-            sidebarLeft(navController)
+            //val navController = rememberNavController()
+            //sidebarLeft(navController)
 
-            //welcomeScreen()
+            welcomeScreen()
         }
     }
 }
