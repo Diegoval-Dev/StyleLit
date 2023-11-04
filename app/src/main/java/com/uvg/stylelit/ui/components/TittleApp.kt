@@ -26,7 +26,7 @@ fun TituloPrincipal(text: String, color: Color) {
             fontFamily = FontFamily.SansSerif
         ),
         modifier = Modifier
-            .width(140.dp)
+            .width(200.dp)
             .height(45.dp)
             .offset(13.dp, 1.dp)
     )
@@ -39,7 +39,7 @@ fun TituloPrincipal(text: String, color: Color) {
             color = color
         ),
         modifier = Modifier
-            .width(140.dp)
+            .width(200.dp)
             .height(45.dp)
             .offset(12.dp, 1.dp)
     )
@@ -52,7 +52,7 @@ fun TituloPrincipal(text: String, color: Color) {
             color = White,
         ),
         modifier = Modifier
-            .width(140.dp)
+            .width(200.dp)
             .height(45.dp)
             .offset(10.dp, 1.dp)
     )
@@ -63,6 +63,6 @@ fun TituloPrincipal(text: String, color: Color) {
 @Composable
 fun TitloPrinPreview() {
     MaterialTheme {
-        TituloPrincipal(text = "MEN'S", color = Cyan)
+        TituloPrincipal(text = "WOMAN'S", color = Cyan)
     }
 }
