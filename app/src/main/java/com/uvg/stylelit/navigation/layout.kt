@@ -48,7 +48,9 @@ import com.uvg.stylelit.R
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.screens.ItemsScreen
+import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
+import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -70,7 +72,7 @@ fun MainLayout(navController: NavController, content: @Composable () -> Unit, on
                         Icon(Icons.Default.Menu, contentDescription = "Menu")
                     }
                 },
-                )
+            )
         }
     ) {
         content()
@@ -119,7 +121,7 @@ fun sidebarLeft(navController: NavController){
                             selectedItem.value = item
                         },
 
-                    )
+                        )
                 }
             }
         },
@@ -130,9 +132,10 @@ fun sidebarLeft(navController: NavController){
             //Textos
 
             NavHost(navController = navController as NavHostController, startDestination = routingPages.InitialPage) {
+
                 composable(routingPages.InitialPage) {
                     CommonLayout(drawerState) {
-                        "Aqui ira la pagina inicial"
+                       MenuPage(navController = navController)
                     }
                 }
 

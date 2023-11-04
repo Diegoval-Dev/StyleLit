@@ -1,4 +1,5 @@
 package com.uvg.stylelit.screens.auth
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,13 +19,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
+import androidx.navigation.NavController
 import com.uvg.stylelit.R
+import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
-fun welcomeScreen(){
-
+fun welcomeScreen(navController: NavController){
+    val LoginPage = "Login"
     val ilustratorWelcome = R.drawable.fondo
     val fondoWelcome = R.drawable.group_36
         Box(
@@ -63,11 +67,12 @@ fun welcomeScreen(){
                 Image(painter = painterResource(id =ilustratorWelcome), contentDescription ="", modifier = Modifier.width(300.dp) )
 
                 Spacer(modifier = Modifier.height(32.dp))
-                MyButton(onClick = { /* ... */ }) {
+                MyButton(onClick = { navController.navigate(routingPages.LoginPage) }) {
                     Text("Iniciar sesión", fontSize = 18.sp)
                 }
 
-                MyButton(onClick = { /* ... */ }) {
+
+                MyButton(onClick = {  navController.navigate(routingPages.RegisterPage) }) {
                     Text("Registrarse",fontSize = 18.sp)
                 }
             }
