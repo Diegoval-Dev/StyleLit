@@ -1,4 +1,4 @@
-package com.uvg.stylelit.screens
+package com.uvg.stylelit.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,29 +16,25 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.uvg.stylelit.R
 import com.uvg.stylelit.components.CardClothe
 import com.uvg.stylelit.components.TituloCategoriaSeparador
 import com.uvg.stylelit.components.TituloPrincipal
-import com.uvg.stylelit.data.networking.Card
-import com.uvg.stylelit.ui.theme.Cyan
-import com.uvg.stylelit.ui.theme.DarkBlue
+import com.uvg.stylelit.ui.theme.PinkW
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
-import com.uvg.stylelit.ui.theme.StyleLitTheme
-import com.uvg.stylelit.ui.viewModels.ItemsViewModel
+import com.uvg.stylelit.ui.theme.pinkcom
+import com.uvg.stylelit.ui.viewModels.ItemsVMWomen
 
 
 @Composable
-fun ItemsScreen(navController: NavController,category: String){
+fun ItemsScreenW(navController: NavController,category: String){
     ItemsBody(navController = navController, category = category)
 }
 
 @Composable
-fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavController, category: String) {
+fun ItemsBody(viewModel: ItemsVMWomen = viewModel(), navController: NavController, category: String) {
     viewModel.getClothes()
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -50,9 +46,9 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
                 .padding(top = 5.dp, bottom = 10.dp),
             contentAlignment = Alignment.Center
         ) {
-            TituloPrincipal(text = "MEN'S", color = Cyan)
+            TituloPrincipal(text = "WOMAN'S", color = PinkW)
         }
-        TituloCategoriaSeparador(text = category, color = DarkBlue)
+        TituloCategoriaSeparador(text = category, color = pinkcom)
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 160.dp),
@@ -60,7 +56,7 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(all = 10.dp)
         ) {
-            items(viewModel.ItemsUiState.items) { card ->
+            items(viewModel.WItemsUiState.items) { card ->
                 CardClothe(id = card.id, text = card.text)
             }
         }
@@ -72,7 +68,3 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
         )
     }
 }
-
-
-
-

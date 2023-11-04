@@ -16,7 +16,7 @@ class MensCategoryViewModel(private val repository: Repository = Repository()): 
 
     val tempCategories: List<String> =  listOf("Pantalones", "Camisas",
         "Accesorios", "Chaquetas & Abrigos",
-        "Ropa Deportiva", "Ropa Interior")
+        "Ropa Deportiva", "Ropa Interior", "Ropa de baño")
     fun getCategories() {
         MensCategoryUiState = MensCategoryUiState(emptyList(), loading = true)
 
