@@ -5,17 +5,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.laboratorio4.CommonLayout
 import com.example.laboratorio4.sidebarLeft
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.screens.auth.RegisterPage
 import com.uvg.stylelit.screens.auth.welcomeScreen
+import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 
 //Aqui iran todas las pantallas que tendremos por separado
 object routingPages {
     //Rutas generales
-    const val welcomePage = "Welcome"
     const val LoginPage = "Login"
     const val RegisterPage = "Register"
     const val MenuPages = "Menu"
@@ -34,15 +35,24 @@ object routingPages {
 
 
 @Composable
-fun SetupNavigation(navController: NavHostController) {
+fun SetupNavigation() {
+    val navController = rememberNavController();
+    NavHost(
+        navController = navController,
+        startDestination = NavigationState.Welcome.route) {
 
-    NavHost(navController = navController, startDestination = routingPages.welcomePage) {
-        composable(routingPages.welcomePage) { welcomeScreen(navController) }
-        composable(routingPages.LoginPage) { LoginPage(navController) }
-        composable(routingPages.RegisterPage) { RegisterPage(navController)}
-        composable(routingPages.MenuPages) { MenuPage(navController) }
-        composable(routingPages.categoryPages) { MensCategoryScreen(navController) }
-        composable(routingPages.InitialPage) {sidebarLeft(navController)}
+            composable(route = NavigationState.Welcome.route) {
+                welcomeScreen(navController)
+            }
+            composable(route = NavigationState.Login.route) {
+                LoginPage(navController)
+            }
+            composable(route = NavigationState.Register.route) {
+                RegisterPage(navController)
+            }
+            composable(route = NavigationState.Inicio.route) {
+                sidebarLeft()
+            }
 
     }
 }

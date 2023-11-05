@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.uvg.stylelit.R
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.navigation.routingPages
@@ -87,7 +88,8 @@ fun MainLayout(navController: NavController, content: @Composable () -> Unit, on
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)@Composable
-fun sidebarLeft(navController: NavController){
+fun sidebarLeft(){
+    val navController = rememberNavController()
     val iconUser = painterResource(id = R.drawable.baseline_person_24)
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -135,11 +137,11 @@ fun sidebarLeft(navController: NavController){
             val iconMenu = painterResource(id = R.drawable.baseline_menu_24)
             //Textos
 
-            NavHost(navController = navController as NavHostController, startDestination = routingPages.InitialPage) {
+            NavHost(navController = navController as NavHostController, startDestination = NavigationState.Inicio.route) {
 
-                composable(routingPages.InitialPage) {
+                composable(NavigationState.Inicio.route) {
                     CommonLayout(drawerState) {
-                       MenuPage(navController = navController)
+                        MenuPage(navController = navController)
                     }
                 }
 

@@ -34,8 +34,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
-            SetupNavigation(navController)  // Llama a SetupNavigation
+            SetupNavigation()
         }
     }
 
@@ -43,12 +42,3 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    StyleLitTheme {
-        val navController = rememberNavController()
-        sidebarLeft(navController)
-
-    }
-}

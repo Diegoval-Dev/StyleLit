@@ -42,6 +42,11 @@ import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
 import okhttp3.internal.wait
 import androidx.compose.ui.res.vectorResource
+import com.example.laboratorio4.CommonLayout
+import com.example.laboratorio4.sidebarLeft
+import com.uvg.stylelit.navigation.NavigationState
+import com.uvg.stylelit.navigation.SetupNavigation
+import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 
 //Inicio de sesión
 @Composable
@@ -145,7 +150,7 @@ fun LoginPage(navController: NavController){
             }
             Spacer(modifier = Modifier.height(32.dp))
             MyButton(onClick = {
-                navController.navigate(routingPages.InitialPage)
+                navController.navigate(NavigationState.Inicio.route)
             }) {
                 Text("Iniciar sesión", fontSize = 18.sp)
             }

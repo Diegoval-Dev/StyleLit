@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
+import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
@@ -67,12 +68,12 @@ fun welcomeScreen(navController: NavController){
                 Image(painter = painterResource(id =ilustratorWelcome), contentDescription ="", modifier = Modifier.width(300.dp) )
 
                 Spacer(modifier = Modifier.height(32.dp))
-                MyButton(onClick = { navController.navigate(routingPages.LoginPage) }) {
+                MyButton(onClick = { navController.navigate(NavigationState.Login.route) }) {
                     Text("Iniciar sesión", fontSize = 18.sp)
                 }
 
 
-                MyButton(onClick = {  navController.navigate(routingPages.RegisterPage) }) {
+                MyButton(onClick = {  navController.navigate(NavigationState.Register.route) }) {
                     Text("Registrarse",fontSize = 18.sp)
                 }
             }
