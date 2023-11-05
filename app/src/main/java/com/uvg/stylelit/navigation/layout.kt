@@ -1,6 +1,7 @@
 package com.example.laboratorio4
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -36,6 +37,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,6 +57,9 @@ import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
+import com.uvg.stylelit.ui.theme.DarkBlue
+import com.uvg.stylelit.ui.theme.PrimaryColorBlue
+import com.uvg.stylelit.ui.theme.White
 
 import kotlinx.coroutines.launch
 
@@ -67,14 +72,15 @@ fun MainLayout(navController: NavController, content: @Composable () -> Unit, on
             TopAppBar(
                 title = {
                     Text(
-                        text = "StyleLit"
+                        text = "StyleLit",
+                        color = Color.White
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = {
                         onNavigatePerfil()             }
                     ) {
-                        Icon(Icons.Default.Menu, contentDescription = "Menu")
+                        Icon(Icons.Default.Menu, contentDescription = "Menu", tint = Color.White)
                     }
                 },
             )
@@ -185,12 +191,13 @@ fun sidebarLeft(){
 fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
     val coroutineScope = rememberCoroutineScope() // Obtener CoroutineScope
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(color = PrimaryColorBlue)) {
         // Encabezado
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp),
+                //.padding(20.dp)
+                .background(color = DarkBlue),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
