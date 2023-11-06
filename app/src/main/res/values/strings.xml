@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">StyleLit</string>
+    <string name="app_name" translatable="false">StyleLit</string>
+    <string name="loginText">Login</string>
+    <string name="stylelit" translatable="false">StyleLit</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="correoText">Email</string>
+    <string name="password">Password</string>
+    <string name="ForgottPass">Have you forgotten your password?</string>
+    <string name="o_inicia_sesi_n_con">Or sign in with</string>
+    <string name="no_tienes_una_cuenta">You do not have an account? </string>
+    <string name="crear">Create </string>
+    <string name="tienes_una_cuenta">You have an account?</string>
+    <string name="registrarme">Register</string>
+    <string name="confirmar_contrase_a">Confirm password</string>
+    <string name="o_registrarme_con">Or register with</string>
 </resources>

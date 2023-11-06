@@ -1,6 +1,7 @@
 package com.uvg.stylelit.screens.auth
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +30,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -41,6 +45,7 @@ import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
 import okhttp3.internal.wait
 import androidx.compose.ui.res.vectorResource
+import com.uvg.stylelit.navigation.NavigationState
 
 //Inicio de sesión
 @Composable
@@ -51,6 +56,7 @@ fun RegisterPage(navController: NavController){
     val ilustratorWelcome = R.drawable.fondo
     val fondoWelcome = R.drawable.group_36
     var google  = R.drawable.google
+    val scrollState = rememberScrollState()
 
 
     //inputs
@@ -65,17 +71,20 @@ fun RegisterPage(navController: NavController){
         // Suponiendo que tienes un recurso SVG llamado "background_image"
         Image(
             painter = painterResource(id = fondoWelcome),
-            contentDescription = null,
+            contentDescription = null, // Aquí podrías agregar una descripción para accesibilidad
+            contentScale = ContentScale.Crop,  // Esto se asegura de que la imagen cubra todo el espacio, recortando si es necesario
             modifier = Modifier.fillMaxSize()  // Esto hará que la imagen llene toda la pantalla
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
+                .verticalScroll(scrollState)
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             Text(
-                text = "Registrarme",
+                text = stringResource(R.string.registrarme),
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.White,
@@ -87,7 +96,7 @@ fun RegisterPage(navController: NavController){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)) {
-                Text("Correo Electrónico", color = Color.White, modifier = Modifier.padding(bottom = 5.dp))
+                Text(stringResource(R.string.correoText), color = Color.White, modifier = Modifier.padding(bottom = 5.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -113,7 +122,7 @@ fun RegisterPage(navController: NavController){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)) {
-                Text("Contraseña" , color = Color.White,  modifier = Modifier.padding(bottom = 5.dp))
+                Text(stringResource(R.string.password) , color = Color.White,  modifier = Modifier.padding(bottom = 5.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -139,7 +148,7 @@ fun RegisterPage(navController: NavController){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)) {
-                Text("Confirmar contraseña" , color = Color.White,  modifier = Modifier.padding(bottom = 5.dp))
+                Text(stringResource(R.string.confirmar_contrase_a) , color = Color.White,  modifier = Modifier.padding(bottom = 5.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -165,13 +174,15 @@ fun RegisterPage(navController: NavController){
             MyButton(onClick = {
                 navController.navigate(routingPages.InitialPage)
             }) {
-                Text("Registrarme", fontSize = 18.sp)
+                Text(stringResource(R.string.register), fontSize = 18.sp)
             }
+
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
+
             ) {
-                Text("O registrarme con ", fontSize = 14.sp, color = Color.White)
+                Text(stringResource(R.string.o_registrarme_con), fontSize = 14.sp, color = Color.White)
                 Row {
                     Image(
                         painter = painterResource(id = Google),
@@ -193,8 +204,13 @@ fun RegisterPage(navController: NavController){
                     )
                 }
                 Row {
-                    Text("Tienes una cuenta? ", fontSize = 14.sp, color = Color.White)
-                    Text(text = "Iniciar sesión", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                    Text(stringResource(R.string.tienes_una_cuenta), fontSize = 14.sp, color = Color.White)
+                    Text(
+                        text = stringResource(R.string.loginText),
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.clickable{navController.navigate(NavigationState.Login.route)}.padding(start = 5.dp)
+                    )
                 }
 
             }

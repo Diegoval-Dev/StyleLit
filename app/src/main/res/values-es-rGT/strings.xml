@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loginText">Iniciar sesión</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="correoText">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="ForgottPass">"¿Has olvidado tu contraseña? "</string>
+    <string name="o_inicia_sesi_n_con">"O inicia sesión con  "</string>
+    <string name="no_tienes_una_cuenta">"No tienes una cuenta?  "</string>
+    <string name="crear">Crear</string>
+    <string name="tienes_una_cuenta">"Tienes una cuenta?  "</string>
+    <string name="registrarme">Registrarse</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
+    <string name="o_registrarme_con">"O registrarme con "</string>
+</resources>

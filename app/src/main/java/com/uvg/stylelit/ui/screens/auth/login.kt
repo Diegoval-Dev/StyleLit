@@ -2,6 +2,7 @@ package com.uvg.stylelit.screens.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -71,7 +73,8 @@ fun LoginPage(navController: NavController){
         // Suponiendo que tienes un recurso SVG llamado "background_image"
         Image(
             painter = painterResource(id = fondoWelcome),
-            contentDescription = null,
+            contentDescription = null, // Aquí podrías agregar una descripción para accesibilidad
+            contentScale = ContentScale.Crop,  // Esto se asegura de que la imagen cubra todo el espacio, recortando si es necesario
             modifier = Modifier.fillMaxSize()  // Esto hará que la imagen llene toda la pantalla
         )
         Column(
@@ -81,7 +84,7 @@ fun LoginPage(navController: NavController){
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             Text(
-                text = "Iniciar Sesión",
+                text = stringResource(R.string.loginText),
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.White,
@@ -93,7 +96,7 @@ fun LoginPage(navController: NavController){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)) {
-                Text("Correo Electrónico", color = Color.White, modifier = Modifier.padding(bottom = 5.dp))
+                Text(stringResource(R.string.correoText), color = Color.White, modifier = Modifier.padding(bottom = 5.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -119,7 +122,7 @@ fun LoginPage(navController: NavController){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)) {
-                Text("Contraseña" , color = Color.White,  modifier = Modifier.padding(bottom = 5.dp))
+                Text(stringResource(R.string.password) , color = Color.White,  modifier = Modifier.padding(bottom = 5.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -146,19 +149,19 @@ fun LoginPage(navController: NavController){
                     .padding(horizontal = 20.dp, vertical = 10.dp)  // Ajusta el padding superior según sea necesario
             ) {
                 Spacer(modifier = Modifier.weight(1f))  // Empuja el texto hacia la derecha
-                Text("¿Has olvidado tu contraseña?", fontSize = 14.sp, color = Color.White)
+                Text(stringResource(R.string.ForgottPass), fontSize = 14.sp, color = Color.White)
             }
             Spacer(modifier = Modifier.height(32.dp))
             MyButton(onClick = {
                 navController.navigate(NavigationState.Inicio.route)
             }) {
-                Text("Iniciar sesión", fontSize = 18.sp)
+                Text(stringResource(R.string.loginText), fontSize = 18.sp)
             }
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("O inicia sesión con ", fontSize = 14.sp, color = Color.White)
+                Text(stringResource(R.string.o_inicia_sesi_n_con), fontSize = 14.sp, color = Color.White)
                 Row {
                     Image(
                         painter = painterResource(id = Google),
@@ -180,8 +183,10 @@ fun LoginPage(navController: NavController){
                     )
                 }
                 Row {
-                    Text("No tienes una cuenta? ", fontSize = 14.sp, color = Color.White)
-                    Text(text = "Crear", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                    Text(stringResource(R.string.no_tienes_una_cuenta), fontSize = 14.sp, color = Color.White, modifier = Modifier.padding(start = 2.dp))
+                    Text(text = stringResource(R.string.crear), fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.White,
+                        modifier = Modifier.clickable { navController.navigate(NavigationState.Register.route)}.padding(start = 5.dp)
+                    )
                 }
 
             }

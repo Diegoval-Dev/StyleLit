@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
 import com.uvg.stylelit.navigation.NavigationState
@@ -29,7 +31,7 @@ import com.uvg.stylelit.ui.theme.MyButton
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun welcomeScreen(navController: NavController){
-    val LoginPage = "Login"
+    val LoginPage = stringResource(R.string.loginText)
     val ilustratorWelcome = R.drawable.fondo
     val fondoWelcome = R.drawable.group_36
         Box(
@@ -41,7 +43,8 @@ fun welcomeScreen(navController: NavController){
             // Suponiendo que tienes un recurso SVG llamado "background_image"
             Image(
                 painter = painterResource(id = fondoWelcome),
-                contentDescription = null,
+                contentDescription = null, // Aquí podrías agregar una descripción para accesibilidad
+                contentScale = ContentScale.Crop,  // Esto se asegura de que la imagen cubra todo el espacio, recortando si es necesario
                 modifier = Modifier.fillMaxSize()  // Esto hará que la imagen llene toda la pantalla
             )
             Column(
@@ -50,7 +53,7 @@ fun welcomeScreen(navController: NavController){
                 modifier = Modifier.padding(16.dp)
             ) {
                 Text(
-                    text = "StyleLit",
+                    text = stringResource(R.string.stylelit),
                     fontSize = 85.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.White,
@@ -69,12 +72,12 @@ fun welcomeScreen(navController: NavController){
 
                 Spacer(modifier = Modifier.height(32.dp))
                 MyButton(onClick = { navController.navigate(NavigationState.Login.route) }) {
-                    Text("Iniciar sesión", fontSize = 18.sp)
+                    Text(stringResource(R.string.login), fontSize = 18.sp)
                 }
 
 
                 MyButton(onClick = {  navController.navigate(NavigationState.Register.route) }) {
-                    Text("Registrarse",fontSize = 18.sp)
+                    Text(stringResource(R.string.register),fontSize = 18.sp)
                 }
             }
         }
