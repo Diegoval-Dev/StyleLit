@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -59,6 +60,7 @@ fun Cloths(navController: NavController) {
     val imagecard2 = R.drawable.b12
     val imagecard3 = R.drawable.b13
     val imagecard4 = R.drawable.b14
+    val imagecard5 = R.drawable.b15
 
     val scrollState = rememberScrollState()
 
@@ -73,13 +75,20 @@ fun Cloths(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(PrimaryColorBlue)
-                .padding(top = 5.dp, bottom = 10.dp),
+                .padding(top = 5.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             TituloPrincipal(text = "WOMAN'S", color = PinkW)
         }
 
-        // Contenido principal después del encabezado
+        Divider(
+            color = Gold,
+            thickness = 2.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 12.dp)
+        )
+
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
@@ -90,77 +99,162 @@ fun Cloths(navController: NavController) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .background(Color.White)
+                        .border(6.dp, color = pinkcom2)
+                        .border(8.dp, color = Color.White),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = "Blusas Larga",
-                        color = Color.White,
+                        color = Color.Black,
                         fontSize = 36.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .padding(8.dp)
-                    )
-                    Divider(
-                        color = Gold,
-                        thickness = 5.dp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 52.dp)
                     )
                 }
             }
 
             item {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                        //.height(400.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    //Imagen 1
-                    Image(
-                        painter = painterResource(imagecard),
-                        contentDescription = null,
+                    // Imagen 1
+                    Row(
                         modifier = Modifier
-                            .size(150.dp) // Ajusta el tamaño de la imagen según tus necesidades
-                            .background(MaterialTheme.colorScheme.background)
-                            .border(10.dp, color = pinkcom2)
-                            .border(13.dp, color = Color.White)
-                    )
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(imagecard),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(150.dp)
+                                .background(MaterialTheme.colorScheme.background)
+                                .border(10.dp, color = pinkcom2)
+                                .border(13.dp, color = Color.White)
+                        )
 
-                    //Imagen 2
-                    Image(
-                        painter = painterResource(imagecard2),
-                        contentDescription = null,
+                        Text(
+                            text = "Texto 1",
+                            color = Color.White,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+
+                    // Imagen 2
+                    Row(
                         modifier = Modifier
-                            .size(150.dp) // Ajusta el tamaño de la imagen según tus necesidades
-                            .background(MaterialTheme.colorScheme.background)
-                            .border(10.dp, color = pinkcom2)
-                            .border(13.dp, color = Color.White)
-                    )
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(imagecard2),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(150.dp)
+                                .background(MaterialTheme.colorScheme.background)
+                                .border(10.dp, color = pinkcom2)
+                                .border(13.dp, color = Color.White)
+                        )
+
+                        Text(
+                            text = "Texto 2",
+                            color = Color.White,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
 
                     //Imagen 3
-                    Image(
-                        painter = painterResource(imagecard3),
-                        contentDescription = null,
+                    Row(
                         modifier = Modifier
-                            .size(150.dp) // Ajusta el tamaño de la imagen según tus necesidades
-                            .background(MaterialTheme.colorScheme.background)
-                            .border(10.dp, color = pinkcom2)
-                            .border(13.dp, color = Color.White)
-                    )
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(imagecard3),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(150.dp)
+                                .background(MaterialTheme.colorScheme.background)
+                                .border(10.dp, color = pinkcom2)
+                                .border(13.dp, color = Color.White)
+                        )
+
+                        Text(
+                            text = "Texto 2",
+                            color = Color.White,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
 
                     //Imagen 4
-                    Image(
-                        painter = painterResource(imagecard4),
-                        contentDescription = null,
+                    Row(
                         modifier = Modifier
-                            .size(150.dp) // Ajusta el tamaño de la imagen según tus necesidades
-                            .background(MaterialTheme.colorScheme.background)
-                            .border(10.dp, color = pinkcom2)
-                            .border(13.dp, color = Color.White)
-                    )
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(imagecard4),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(150.dp)
+                                .background(MaterialTheme.colorScheme.background)
+                                .border(10.dp, color = pinkcom2)
+                                .border(13.dp, color = Color.White)
+                        )
+
+                        Text(
+                            text = "Texto 2",
+                            color = Color.White,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+
+
+                    //Imagen 5
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(imagecard5),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(150.dp)
+                                .background(MaterialTheme.colorScheme.background)
+                                .border(10.dp, color = pinkcom2)
+                                .border(13.dp, color = Color.White)
+                        )
+
+                        Text(
+                            text = "Texto 2",
+                            color = Color.White,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
                 }
             }
         }
