@@ -51,10 +51,12 @@ import com.uvg.stylelit.navigation.routingPages
 
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
+import com.uvg.stylelit.ui.screens.Cloths
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
+
 
 import kotlinx.coroutines.launch
 
@@ -148,9 +150,11 @@ fun sidebarLeft(){
                 composable(routingPages.categoryPages) {
                     CommonLayout(drawerState) {
                         //MensCategoryScreen(navController)
-                        WomenCategoryScreen(navController)
+                        Cloths(navController)
                     }
                 }
+
+
 
                 composable(routingPages.storesPages) {
                     CommonLayout(drawerState = drawerState) {
@@ -169,12 +173,18 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(route = NavigationState.Cloth.route + "/{category}") { backstackEntry ->
+                composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") {
+                    Cloths(navController)
+                }
+
+                /**
+                composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
                         //ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
-                        ItemsScreenW(navController, backstackEntry.arguments?.getString("category") ?: "")
+                        ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
                     }
                 }
+                **/
             }
         }
     )

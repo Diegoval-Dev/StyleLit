@@ -13,6 +13,7 @@ import com.uvg.stylelit.screens.auth.welcomeScreen
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
+import com.uvg.stylelit.ui.screens.Cloths
 
 //Aqui iran todas las pantallas que tendremos por separado
 object routingPages {
@@ -31,6 +32,7 @@ object routingPages {
     const val storesPages = "Tiendas"
     const val favoritePages = "Destacados"
     const val configurationPages = "Configuracion"
+    const val ClothesCards = "CardsClothes"
 }
 
 
@@ -53,7 +55,10 @@ fun SetupNavigation() {
             composable(route = NavigationState.Inicio.route) {
                 sidebarLeft()
             }
-
+            /**composable(route = NavigationState.Cloth.route) {
+                Cloths(navController)
+            }
+            **/
     }
 }
 
