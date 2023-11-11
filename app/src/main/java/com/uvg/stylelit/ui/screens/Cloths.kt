@@ -1,48 +1,40 @@
 package com.uvg.stylelit.ui.screens
 
+import ClothesViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
-import com.uvg.stylelit.components.TituloPrincipal
-import com.uvg.stylelit.ui.theme.Gold
-import com.uvg.stylelit.ui.theme.PinkW
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
-import com.uvg.stylelit.ui.theme.White
-import com.uvg.stylelit.ui.theme.pinkcom
 import com.uvg.stylelit.ui.theme.pinkcom2
+import com.uvg.stylelit.ui.theme.White
 
 
 /**
@@ -55,206 +47,77 @@ import com.uvg.stylelit.ui.theme.pinkcom2
 //viewModel: ClothesViewModel = viewModel(),
 @Composable
 fun Cloths(navController: NavController) {
-    //viewModel.getCategories()
-    val imagecard = R.drawable.b11
-    val imagecard2 = R.drawable.b12
-    val imagecard3 = R.drawable.b13
-    val imagecard4 = R.drawable.b14
-    val imagecard5 = R.drawable.b15
+    val viewModel: ClothesViewModel = viewModel()
+    val productDescriptions = viewModel.getProductDescriptions()
 
-    val scrollState = rememberScrollState()
-
-    // Contenido principal antes del encabezado
-    Column(
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(15.dp),
         modifier = Modifier
             .fillMaxSize()
             .background(PrimaryColorBlue)
+            .padding(1.dp)
     ) {
-        // Encabezado
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(PrimaryColorBlue)
-                .padding(top = 5.dp),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            TituloPrincipal(text = "WOMAN'S", color = PinkW)
-        }
-
-        Divider(
-            color = Gold,
-            thickness = 2.dp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 12.dp)
-        )
-
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(11.dp)
-        ) {
-            item {
-                Box(
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .width(50.dp)
+                    .background(pinkcom2),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Blusas Larga",
+                    color = Color.White,
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.White)
-                        .border(6.dp, color = pinkcom2)
-                        .border(8.dp, color = Color.White),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Blusas Larga",
-                        color = Color.Black,
-                        fontSize = 36.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                            .padding(8.dp)
-                    )
-                }
+                        .padding(8.dp)
+                        .width(150.dp)
+                )
             }
+        }
+        itemsIndexed(productDescriptions) { index, descriptionList ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Image(
+                    painter = painterResource(viewModel.imageCards[index % viewModel.imageCards.size]),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(150.dp)
+                        .background(MaterialTheme.colorScheme.background)
+                )
 
-            item {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
-                    // Imagen 1
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(imagecard),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(150.dp)
-                                .background(MaterialTheme.colorScheme.background)
-                                .border(10.dp, color = pinkcom2)
-                                .border(13.dp, color = Color.White)
-                        )
-
+                    descriptionList.forEach { description ->
                         Text(
-                            text = "Texto 1",
+                            text = description,
                             color = Color.White,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(8.dp)
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Light
                         )
                     }
+                }
 
-                    // Imagen 2
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(imagecard2),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(150.dp)
-                                .background(MaterialTheme.colorScheme.background)
-                                .border(10.dp, color = pinkcom2)
-                                .border(13.dp, color = Color.White)
-                        )
-
-                        Text(
-                            text = "Texto 2",
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-
-                    //Imagen 3
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(imagecard3),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(150.dp)
-                                .background(MaterialTheme.colorScheme.background)
-                                .border(10.dp, color = pinkcom2)
-                                .border(13.dp, color = Color.White)
-                        )
-
-                        Text(
-                            text = "Texto 2",
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-
-                    //Imagen 4
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(imagecard4),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(150.dp)
-                                .background(MaterialTheme.colorScheme.background)
-                                .border(10.dp, color = pinkcom2)
-                                .border(13.dp, color = Color.White)
-                        )
-
-                        Text(
-                            text = "Texto 2",
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-
-
-                    //Imagen 5
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(imagecard5),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(150.dp)
-                                .background(MaterialTheme.colorScheme.background)
-                                .border(10.dp, color = pinkcom2)
-                                .border(13.dp, color = Color.White)
-                        )
-
-                        Text(
-                            text = "Texto 2",
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
+                IconButton(
+                    onClick = {
+                        // Acción al presionar el botón
+                    },
+                    modifier = Modifier.size(44.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(viewModel.carritoIcon),
+                        contentDescription = "Icono de compras",
+                        tint = Color.White,
+                        modifier = Modifier.size(53.dp)
+                    )
                 }
             }
         }
