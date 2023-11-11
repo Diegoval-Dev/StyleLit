@@ -58,18 +58,19 @@ fun Cloths(navController: NavController) {
             .padding(1.dp)
     ) {
         item {
+            val headerInfo = viewModel.getHeaderInfo()
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .width(50.dp)
-                    .background(pinkcom2),
+                    .background(headerInfo.backgroundColor),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Blusas Larga",
-                    color = Color.White,
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
+                    text = headerInfo.title,
+                    color = headerInfo.textColor,
+                    fontSize = headerInfo.fontSize,
+                    fontWeight = headerInfo.fontWeight,
                     modifier = Modifier
                         .padding(8.dp)
                         .width(150.dp)
@@ -105,7 +106,6 @@ fun Cloths(navController: NavController) {
                         )
                     }
                 }
-
                 IconButton(
                     onClick = {
                         // Acción al presionar el botón

@@ -1,10 +1,32 @@
 import androidx.lifecycle.ViewModel
 import com.uvg.stylelit.R
-
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.uvg.stylelit.ui.theme.pinkcom2
 
 class ClothesViewModel : ViewModel() {
     val imageCards = listOf(R.drawable.b11, R.drawable.b12, R.drawable.b13, R.drawable.b14, R.drawable.b15)
     val carritoIcon = R.drawable.icon_carritos
+
+    data class HeaderInfo(
+        val title: String,
+        val backgroundColor: Color,
+        val textColor: Color,
+        val fontSize: TextUnit,
+        val fontWeight: FontWeight
+    )
+    fun getHeaderInfo(): HeaderInfo {
+        return HeaderInfo(
+            title = "Blusas Larga",
+            backgroundColor = pinkcom2,
+            textColor = Color.White,
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
 
     fun getProductDescriptions(): List<List<String>> {
         return listOf(
