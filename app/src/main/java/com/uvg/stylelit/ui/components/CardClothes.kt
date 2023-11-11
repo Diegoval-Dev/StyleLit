@@ -3,6 +3,7 @@ package com.uvg.stylelit.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,9 +37,11 @@ import com.uvg.stylelit.ui.theme.White
  * @param text El texto que se mostrará en la tarjeta.
  */
 @Composable
-fun CardClothe(@DrawableRes id: Int, text: String){
+fun CardClothe(@DrawableRes id: Int, text: String, onClick: () -> Unit){
     val image = painterResource(id = id)
-    Card {
+    Card (
+        modifier = Modifier.clickable(onClick = onClick)
+    ){
         Box(
             modifier = Modifier
                 .height(160.dp)
@@ -77,6 +80,7 @@ fun CardClothe(@DrawableRes id: Int, text: String){
 @Composable
 fun Preview() {
     StyleLitTheme {
-        CardClothe(id = R.drawable.ic_launcher_background, text = "Prueba")
+        CardClothe(id = R.drawable.ic_launcher_background, text = "Prueba"){
+        }
     }
 }

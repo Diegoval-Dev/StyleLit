@@ -149,8 +149,8 @@ fun sidebarLeft(){
 
                 composable(routingPages.categoryPages) {
                     CommonLayout(drawerState) {
+                        WomenCategoryScreen(navController)
                         //MensCategoryScreen(navController)
-                        Cloths(navController)
                     }
                 }
 
@@ -173,18 +173,22 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") {
-                    Cloths(navController)
-                }
-
-                /**
                 composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
                         //ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
                         ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
                     }
                 }
-                **/
+
+                composable(
+                    route = "Cloths/{category}",
+                    content = { backstackEntry ->
+                        val category = backstackEntry.arguments?.getString("category")
+                        CommonLayout(drawerState = drawerState) {
+                            Cloths(navController = navController, category = category ?: "")
+                        }
+                    }
+                )
             }
         }
     )

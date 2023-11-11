@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,12 +15,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,22 +30,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.uvg.stylelit.R
+import com.uvg.stylelit.ui.components.ButtonCategory
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
-import com.uvg.stylelit.ui.theme.pinkcom2
-import com.uvg.stylelit.ui.theme.White
+import com.uvg.stylelit.ui.theme.pinkcom
 
-
-/**
- @Composable
- fun Cloth(navController: NavController){
-    Cloth(navController = navController)
- }
- */
-
-//viewModel: ClothesViewModel = viewModel(),
 @Composable
-fun Cloths(navController: NavController) {
+fun Cloths(navController: NavController, category: String) {
     val viewModel: ClothesViewModel = viewModel()
     val productDescriptions = viewModel.getProductDescriptions()
 
@@ -57,6 +46,15 @@ fun Cloths(navController: NavController) {
             .background(PrimaryColorBlue)
             .padding(1.dp)
     ) {
+        items(viewModel.ClothesUiState.categories) { category ->
+            ButtonCategory(
+                text = category,
+                color = pinkcom,
+                navController = navController,
+                cloth = category
+            )
+            Divider(color = PrimaryColorBlue, thickness = 10.dp)
+        }
         item {
             val headerInfo = viewModel.getHeaderInfo()
             Box(
@@ -97,13 +95,15 @@ fun Cloths(navController: NavController) {
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
-                    descriptionList.forEach { description ->
-                        Text(
-                            text = description,
-                            color = Color.White,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Light
-                        )
+                    for (description in descriptionList) {
+                        description.split("\n").forEach {
+                            Text(
+                                text = it,
+                                color = Color.White,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Light
+                            )
+                        }
                     }
                 }
                 IconButton(

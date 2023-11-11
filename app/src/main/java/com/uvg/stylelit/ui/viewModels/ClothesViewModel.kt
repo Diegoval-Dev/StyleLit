@@ -1,3 +1,6 @@
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.uvg.stylelit.R
 import androidx.compose.ui.graphics.Color
@@ -6,8 +9,12 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uvg.stylelit.ui.theme.pinkcom2
+import com.uvg.stylelit.ui.uiStates.ClothesUiState
 
 class ClothesViewModel : ViewModel() {
+
+    var ClothesUiState by mutableStateOf(ClothesUiState(emptyList()))
+        private set
     val imageCards = listOf(R.drawable.b11, R.drawable.b12, R.drawable.b13, R.drawable.b14, R.drawable.b15)
     val carritoIcon = R.drawable.icon_carritos
 
@@ -63,5 +70,3 @@ class ClothesViewModel : ViewModel() {
         )
     }
 }
-
-//class ClothesViewModel(private val repository: Repository = Repository()): ViewModel() { }
