@@ -61,7 +61,8 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
             contentPadding = PaddingValues(all = 10.dp)
         ) {
             items(viewModel.ItemsUiState.items) { card ->
-                CardClothe(id = card.id, text = card.text)
+                CardClothe(id = card.id, text = card.text) {
+                }
             }
         }
 

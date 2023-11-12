@@ -48,11 +48,15 @@ fun WomenCategoryScreenBody(viewModel: WomenCategoryViewModel = viewModel(),navC
             TituloPrincipal(text = "WOMAN'S", color = PinkW)
         }
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
-            items(viewModel.WomansCategoryUiState.categories) { category->
-                ButtonCategory(text = category, color = pinkcom, navController, category)
+            items(viewModel.WomansCategoryUiState.categories) { category ->
+                ButtonCategory(
+                    text = category,
+                    color = pinkcom,
+                    navController = navController, // Asegurarse de pasar el NavController a ButtonCategory
+                    cloth = category // Otra información necesaria
+                )
                 Divider(color = PrimaryColorBlue, thickness = 10.dp)
             }
         }
