@@ -120,7 +120,6 @@ fun sidebarLeft(){
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(
-                drawerContainerColor = DarkSlateBlue
             ){
                 Spacer(Modifier.height(12.dp))
                 //Aqui va el encabezado del sidebar
@@ -128,8 +127,8 @@ fun sidebarLeft(){
                     NavigationDrawerItem(
                         modifier = Modifier
                             .padding(NavigationDrawerItemDefaults.ItemPadding),
-                        icon = { Icon(item.icon, contentDescription = null, tint = Color.White) },
-                        label = { Text(item.label, color = Color.White) },
+                        icon = { Icon(item.icon, contentDescription = null, tint = DarkSlateBlue) },
+                        label = { Text(item.label, color = DarkSlateBlue) },
                         selected = item == selectedItem.value,
                         onClick = {
                             navController.navigate(item.route)
