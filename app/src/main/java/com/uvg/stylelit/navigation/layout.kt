@@ -59,6 +59,7 @@ import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
 import com.uvg.stylelit.ui.theme.DarkBlue
+import com.uvg.stylelit.ui.theme.DarkSlateBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.White
 
@@ -115,10 +116,11 @@ fun sidebarLeft(){
     //icons
     val iconList = painterResource(id = R.drawable.baseline_menu_24)
     ModalNavigationDrawer(
+
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(
-                //drawerContainerColor = PrimaryColorBlue,
+                drawerContainerColor = DarkSlateBlue
             ){
                 Spacer(Modifier.height(12.dp))
                 //Aqui va el encabezado del sidebar
@@ -126,8 +128,8 @@ fun sidebarLeft(){
                     NavigationDrawerItem(
                         modifier = Modifier
                             .padding(NavigationDrawerItemDefaults.ItemPadding),
-                        icon = { Icon(item.icon, contentDescription = null) },
-                        label = { Text(item.label) },
+                        icon = { Icon(item.icon, contentDescription = null, tint = Color.White) },
+                        label = { Text(item.label, color = Color.White) },
                         selected = item == selectedItem.value,
                         onClick = {
                             navController.navigate(item.route)
@@ -211,7 +213,7 @@ fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 //.padding(20.dp)
-                .background(color = DarkBlue),
+                .background(color = DarkSlateBlue),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
@@ -220,15 +222,18 @@ fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
             IconButton(onClick = {
                 coroutineScope.launch { // Lanzar dentro del CoroutineScope
                     drawerState.open()
+
                 }
             }) {
                 Icon(painter = iconMenu, contentDescription = "",
+                    tint = Color.White,
                     modifier = Modifier
                         .size(40.dp)
                         .padding(top = 10.dp))
             }
             Text(
                 text = "StyLit",
+                color = White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight(600),
                 modifier = Modifier.padding(vertical = 15.dp, horizontal = 20.dp)
