@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.uvg.stylelit.components.CardClothe
 import com.uvg.stylelit.components.TituloCategoriaSeparador
 import com.uvg.stylelit.components.TituloPrincipal
+import com.uvg.stylelit.components.TituloPrincipalMen
 import com.uvg.stylelit.ui.theme.Cyan
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
@@ -46,7 +47,7 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
                 .padding(top = 5.dp, bottom = 10.dp),
             contentAlignment = Alignment.Center
         ) {
-            TituloPrincipal(text = "MEN'S", color = Cyan)
+            TituloPrincipalMen(text = "MEN'S", color = Cyan)
         }
         TituloCategoriaSeparador(text = category, color = DarkBlue)
 

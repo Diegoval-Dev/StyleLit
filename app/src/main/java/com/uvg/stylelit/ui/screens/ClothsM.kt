@@ -65,7 +65,7 @@ fun ClothsM(navController: NavController, category: String) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .width(50.dp)
+                    .width(30.dp)
                     .background(headerInfo.backgroundColor),
                 contentAlignment = Alignment.Center
             ) {
@@ -76,7 +76,7 @@ fun ClothsM(navController: NavController, category: String) {
                     fontWeight = headerInfo.fontWeight,
                     modifier = Modifier
                         .padding(8.dp)
-                        .width(150.dp)
+                        .width(160.dp)
                 )
             }
         }

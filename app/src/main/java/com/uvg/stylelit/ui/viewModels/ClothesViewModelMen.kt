@@ -1,6 +1,8 @@
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import com.uvg.stylelit.R
 import androidx.compose.ui.graphics.Color
@@ -21,6 +23,7 @@ class ClothesViewModelMen : ViewModel() {
 
     data class HeaderInfo(
         val title: String,
+        val modifier: Modifier,
         val backgroundColor: Color,
         val textColor: Color,
         val fontSize: TextUnit,
@@ -29,6 +32,7 @@ class ClothesViewModelMen : ViewModel() {
     fun getHeaderInfo(): HeaderInfo {
         return HeaderInfo(
             title = "Playera Larga",
+            modifier = Modifier.fillMaxWidth(),
             backgroundColor = DarkBlue,
             textColor = Color.White,
             fontSize = 26.sp,
