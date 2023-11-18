@@ -182,8 +182,8 @@ fun sidebarLeft(){
 
                 composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
-                        //ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
-                        ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+                        ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
+                        //ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
                     }
                 }
 

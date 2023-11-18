@@ -4,6 +4,6 @@ import com.uvg.stylelit.data.networking.CategoryResponse
 
 data class MensCategoryUiState(
     //CategoryResponse
-    val categories: List<String>,
+    val categories: List<CategoryResponse>,
     val loading: Boolean = false
 )

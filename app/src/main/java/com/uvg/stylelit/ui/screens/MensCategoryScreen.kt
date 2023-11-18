@@ -52,7 +52,7 @@ fun MensCategoryScreenBody(viewModel: MensCategoryViewModel = viewModel(),navCon
                 .fillMaxSize()
         ) {
             items(viewModel.MensCategoryUiState.categories) { category->
-                ButtonCategory(text = category, color = DarkBlue, navController, category)
+                ButtonCategory(text = category.name, color = DarkBlue, navController, category.name)
                 Divider(color = PrimaryColorBlue, thickness = 10.dp)
             }
         }
