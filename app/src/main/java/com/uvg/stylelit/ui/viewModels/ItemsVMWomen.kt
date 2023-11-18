@@ -34,6 +34,4 @@ class ItemsVMWomen(private val repository: Repository = Repository()): ViewModel
             )
         }
     }
-
-
 }

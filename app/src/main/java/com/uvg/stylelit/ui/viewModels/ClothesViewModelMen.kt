@@ -10,18 +10,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.pinkcom2
 import com.uvg.stylelit.ui.uiStates.ClothesUiState
 
-class ClothesViewModel : ViewModel() {
+class ClothesViewModelMen : ViewModel() {
 
     var ClothesUiState by mutableStateOf(ClothesUiState(emptyList()))
         private set
-    val imageCards = listOf(R.drawable.b11, R.drawable.b12, R.drawable.b13, R.drawable.b14, R.drawable.b15)
+    val imageCardsM = listOf(R.drawable.c1, R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5)
     val carritoIcon = R.drawable.icon_carritos
 
     data class HeaderInfo(
         val title: String,
+        val modifier: Modifier,
         val backgroundColor: Color,
         val textColor: Color,
         val fontSize: TextUnit,
@@ -29,8 +31,9 @@ class ClothesViewModel : ViewModel() {
     )
     fun getHeaderInfo(): HeaderInfo {
         return HeaderInfo(
-            title = "Blusas Larga",
-            backgroundColor = pinkcom2,
+            title = "Playera Larga",
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = DarkBlue,
             textColor = Color.White,
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold

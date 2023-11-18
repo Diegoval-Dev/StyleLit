@@ -54,6 +54,7 @@ import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.ui.screens.Cloths
+import com.uvg.stylelit.ui.screens.ClothsM
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
@@ -106,7 +107,9 @@ fun sidebarLeft(){
     data class DrawerItem(val icon: ImageVector, val route: String, val label: String)
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        //DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryWomansPage, "Mujeres"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryMansPage, "Hombres"),
         DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
         DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
         DrawerItem(Icons.Default.Settings, routingPages.configurationPages, "Configuración")
@@ -155,9 +158,13 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(routingPages.categoryPages) {
+                composable(routingPages.CategoryWomansPage) {
                     CommonLayout(drawerState) {
-                        //WomenCategoryScreen(navController)
+                        WomenCategoryScreen(navController)
+                    }
+                }
+                composable(routingPages.CategoryMansPage) {
+                    CommonLayout(drawerState) {
                         MensCategoryScreen(navController)
                     }
                 }
@@ -183,8 +190,14 @@ fun sidebarLeft(){
 
                 composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
-                        ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
-                        //ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+                        ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+
+                    }
+                }
+
+                composable(route = NavigationState.ClothMe.route + "/{MensCategoryScreen}") { backstackEntry ->
+                    CommonLayout(drawerState = drawerState) {
+                        ItemsScreen(navController, backstackEntry.arguments?.getString("MensCategoryScreen") ?: "")
                     }
                 }
 
@@ -194,6 +207,16 @@ fun sidebarLeft(){
                         val category = backstackEntry.arguments?.getString("category")
                         CommonLayout(drawerState = drawerState) {
                             Cloths(navController = navController, category = category ?: "")
+                        }
+                    }
+                )
+
+                composable(
+                    route = "ClothM/{category}",
+                    content = { backstackEntry ->
+                        val category = backstackEntry.arguments?.getString("category")
+                        CommonLayout(drawerState = drawerState) {
+                            ClothsM(navController = navController, category = category ?: "")
                         }
                     }
                 )

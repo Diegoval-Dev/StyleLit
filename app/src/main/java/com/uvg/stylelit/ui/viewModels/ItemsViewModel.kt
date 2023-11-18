@@ -34,6 +34,4 @@ class ItemsViewModel(private val repository: Repository = Repository()): ViewMod
             )
         }
     }
-
-
 }

@@ -24,6 +24,7 @@ import com.uvg.stylelit.ui.components.ButtonCategory
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.ui.theme.DarkBlue
 
 @Composable
@@ -64,7 +65,15 @@ fun MensCategoryScreenBody(viewModel: MensCategoryViewModel = viewModel(),navCon
                     .fillMaxSize()
             ) {
                 items(viewModel.MensCategoryUiState.categories) { category->
-                    ButtonCategory(text = category.id, color = DarkBlue, navController, category.id)
+                    ButtonCategory(
+                        text = category.name,
+                        color = DarkBlue,
+                        navController = navController,
+                        onClick = {
+                            navController.navigate("${NavigationState.ClothMe.route}/$category")
+                        },
+                        cloth = category.id
+                    )
                     Divider(color = PrimaryColorBlue, thickness = 10.dp)
                 }
             }

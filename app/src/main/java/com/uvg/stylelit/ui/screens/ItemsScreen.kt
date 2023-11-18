@@ -16,19 +16,16 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.uvg.stylelit.R
 import com.uvg.stylelit.components.CardClothe
 import com.uvg.stylelit.components.TituloCategoriaSeparador
 import com.uvg.stylelit.components.TituloPrincipal
-import com.uvg.stylelit.data.networking.Card
+import com.uvg.stylelit.components.TituloPrincipalMen
 import com.uvg.stylelit.ui.theme.Cyan
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
-import com.uvg.stylelit.ui.theme.StyleLitTheme
 import com.uvg.stylelit.ui.viewModels.ItemsViewModel
 
 
@@ -50,7 +47,7 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
                 .padding(top = 5.dp, bottom = 10.dp),
             contentAlignment = Alignment.Center
         ) {
-            TituloPrincipal(text = "MEN'S", color = Cyan)
+            TituloPrincipalMen(text = "MEN'S", color = Cyan)
         }
         TituloCategoriaSeparador(text = category, color = DarkBlue)
 
@@ -62,6 +59,7 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
         ) {
             items(viewModel.ItemsUiState.items) { card ->
                 CardClothe(id = card.id, text = card.text) {
+                    navController.navigate("ClothM/${card.id}")
                 }
             }
         }
@@ -73,7 +71,3 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
         )
     }
 }
-
-
-
-

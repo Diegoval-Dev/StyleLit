@@ -1,6 +1,6 @@
 package com.uvg.stylelit.ui.screens
 
-import ClothesViewModel
+import ClothesViewModelMen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -32,12 +32,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.ui.components.ButtonCategory
+import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
-import com.uvg.stylelit.ui.theme.pinkcom
 
 @Composable
-fun Cloths(navController: NavController, category: String) {
-    val viewModel: ClothesViewModel = viewModel()
+fun ClothsM(navController: NavController, category: String) {
+    val viewModel: ClothesViewModelMen = viewModel()
     val productDescriptions = viewModel.getProductDescriptions()
 
     LazyColumn(
@@ -50,13 +50,14 @@ fun Cloths(navController: NavController, category: String) {
         items(viewModel.ClothesUiState.categories) { category ->
             ButtonCategory(
                 text = category,
-                color = pinkcom,
+                color = DarkBlue,
                 navController = navController,
                 onClick = {
-                    navController.navigate("${NavigationState.Cloth.route}/$category")
+                    navController.navigate("${NavigationState.ClothMe.route}/$category")
                 },
                 cloth = category
             )
+
             Divider(color = PrimaryColorBlue, thickness = 10.dp)
         }
         item {
@@ -64,7 +65,7 @@ fun Cloths(navController: NavController, category: String) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .width(50.dp)
+                    .width(30.dp)
                     .background(headerInfo.backgroundColor),
                 contentAlignment = Alignment.Center
             ) {
@@ -75,7 +76,7 @@ fun Cloths(navController: NavController, category: String) {
                     fontWeight = headerInfo.fontWeight,
                     modifier = Modifier
                         .padding(8.dp)
-                        .width(150.dp)
+                        .width(160.dp)
                 )
             }
         }
@@ -88,7 +89,7 @@ fun Cloths(navController: NavController, category: String) {
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Image(
-                    painter = painterResource(viewModel.imageCards[index % viewModel.imageCards.size]),
+                    painter = painterResource(viewModel.imageCardsM[index % viewModel.imageCardsM.size]),
                     contentDescription = null,
                     modifier = Modifier
                         .size(150.dp)
