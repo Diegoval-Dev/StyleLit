@@ -57,6 +57,7 @@ import com.uvg.stylelit.ui.screens.Cloths
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
+
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.DarkSlateBlue
@@ -156,8 +157,8 @@ fun sidebarLeft(){
 
                 composable(routingPages.categoryPages) {
                     CommonLayout(drawerState) {
-                        WomenCategoryScreen(navController)
-                        //MensCategoryScreen(navController)
+                        //WomenCategoryScreen(navController)
+                        MensCategoryScreen(navController)
                     }
                 }
 

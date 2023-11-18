@@ -1,5 +1,6 @@
 package com.uvg.stylelit.ui.viewModels
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,6 +22,7 @@ class MensCategoryViewModel(private val repository: Repository = Repository()): 
         MensCategoryUiState = MensCategoryUiState(emptyList(), loading = true)
 
         viewModelScope.launch {
+            Log.d("AAAAAAAAAA", repository.getMensCategories().categories.toString())
             MensCategoryUiState = MensCategoryUiState(
                 categories = repository.getMensCategories().categories
             )

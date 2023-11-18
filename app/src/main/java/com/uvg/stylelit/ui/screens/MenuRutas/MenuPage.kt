@@ -14,6 +14,3 @@ fun MenuPage(navController: NavController) {
         color = Color.White
     )
 }
-
-
-
