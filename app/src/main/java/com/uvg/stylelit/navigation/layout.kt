@@ -105,7 +105,9 @@ fun sidebarLeft(){
     data class DrawerItem(val icon: ImageVector, val route: String, val label: String)
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        //DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryWomansPage, "Mujeres"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryMansPage, "Hombres"),
         DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
         DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
         DrawerItem(Icons.Default.Settings, routingPages.configurationPages, "Configuración")
@@ -154,10 +156,14 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(routingPages.categoryPages) {
+                composable(routingPages.CategoryWomansPage) {
                     CommonLayout(drawerState) {
                         WomenCategoryScreen(navController)
-                        //MensCategoryScreen(navController)
+                    }
+                }
+                composable(routingPages.CategoryMansPage) {
+                    CommonLayout(drawerState) {
+                        MensCategoryScreen(navController)
                     }
                 }
 
