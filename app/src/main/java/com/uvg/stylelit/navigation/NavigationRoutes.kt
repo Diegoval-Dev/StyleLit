@@ -10,10 +10,9 @@ import com.example.laboratorio4.sidebarLeft
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.screens.auth.RegisterPage
 import com.uvg.stylelit.screens.auth.welcomeScreen
-import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
-import com.uvg.stylelit.ui.screens.Cloths
+//import com.uvg.stylelit.ui.screens.ClothsW
 
 //Aqui iran todas las pantallas que tendremos por separado
 object routingPages {

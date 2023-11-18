@@ -54,6 +54,7 @@ import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.ui.screens.Cloths
+import com.uvg.stylelit.ui.screens.ClothsM
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
@@ -188,8 +189,13 @@ fun sidebarLeft(){
 
                 composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
-                        //ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
                         ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+                    }
+                }
+
+                composable(route = NavigationState.ClothMe.route + "/{MensCategoryScreen}") { backstackEntry ->
+                    CommonLayout(drawerState = drawerState) {
+                        ItemsScreen(navController, backstackEntry.arguments?.getString("MensCategoryScreen") ?: "")
                     }
                 }
 
@@ -199,6 +205,16 @@ fun sidebarLeft(){
                         val category = backstackEntry.arguments?.getString("category")
                         CommonLayout(drawerState = drawerState) {
                             Cloths(navController = navController, category = category ?: "")
+                        }
+                    }
+                )
+
+                composable(
+                    route = "ClothM/{category}",
+                    content = { backstackEntry ->
+                        val category = backstackEntry.arguments?.getString("category")
+                        CommonLayout(drawerState = drawerState) {
+                            ClothsM(navController = navController, category = category ?: "")
                         }
                     }
                 )

@@ -8,7 +8,8 @@ sealed class NavigationState(val route: String) {
     object Register: NavigationState("Register")
 
     //sidebar
-    object Categories: NavigationState("CategoryMans")
+    //object Categories: NavigationState("CategoryMans")
     object Cloth: NavigationState("Cloth")
+    object ClothMe: NavigationState("ClothMen")
     object Inicio: NavigationState("inicio")
 }
