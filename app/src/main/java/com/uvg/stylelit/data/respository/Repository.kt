@@ -13,9 +13,9 @@ class Repository {
     val db = Firebase.firestore
     val blusas = mutableListOf<DocumentReference>()
 
-    suspend fun getMensCategories(): CategoriesResponse {
+    suspend fun getCategories(type: String): CategoriesResponse {
         return withContext(Dispatchers.IO){
-            val documents = db.collection("Man")
+            val documents = db.collection(type)
                 .get()
                 .await().documents
             CategoriesResponse(

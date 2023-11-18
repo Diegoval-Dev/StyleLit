@@ -22,9 +22,9 @@ class MensCategoryViewModel(private val repository: Repository = Repository()): 
         MensCategoryUiState = MensCategoryUiState(emptyList(), loading = true)
 
         viewModelScope.launch {
-            Log.d("AAAAAAAAAA", repository.getMensCategories().categories.toString())
+            Log.d("AAAAAAAAAA", repository.getCategories("Man").categories.toString())
             MensCategoryUiState = MensCategoryUiState(
-                categories = repository.getMensCategories().categories
+                categories = repository.getCategories("Man").categories
             )
         }
     }
