@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uvg.stylelit.navigation.NavigationState
@@ -37,16 +38,20 @@ import com.uvg.stylelit.ui.components.ClothCard
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.pinkcom
+import com.uvg.stylelit.ui.viewModels.ShopingCartViewModel
 
 @Composable
 fun ClothScreenM(navController: NavController, category: String ,cloth: String){
-
-    ClothBodyM(navController = navController, category = category, cloth = cloth)
+    ClothBodyM(
+        navController = navController,
+        category = category,
+        cloth = cloth
+    )
 }
 @Composable
 fun ClothBodyM(viewModel: ClothesViewModelMen = viewModel(), navController: NavController, category: String, cloth: String){
-    if(viewModel.ClothesUiState.cloth.isEmpty()){
-        viewModel.getDataM(category,cloth)
+    if(viewModel.ClothesUiState.cloth.isEmpty()) {
+        viewModel.getDataM(category, cloth)
     }
     Box(
         modifier = Modifier
@@ -83,11 +88,7 @@ fun ClothBodyM(viewModel: ClothesViewModelMen = viewModel(), navController: NavC
         ) {
             items(viewModel.ClothesUiState.cloth) { cloth ->
                 ClothCard(
-                    url = cloth.imageUrl,
-                    marca = cloth.brand,
-                    tallas = cloth.sizes,
-                    precio = cloth.price,
-                    colores = cloth.colors
+                    clothes = cloth,
                 )
             }
         }

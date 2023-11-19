@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 class Repository {
     val db = Firebase.firestore
-    val blusas = mutableListOf<DocumentReference>()
+    val shopingCartElements = mutableListOf<Clothes>()
 
     suspend fun getCategories(type: String): CategoriesResponse {
         return withContext(Dispatchers.IO){
@@ -72,6 +72,18 @@ class Repository {
                 }
             )
         }
+    }
+
+
+    fun addShopingItems(clothes: Clothes){
+        shopingCartElements.add(clothes)
+    }
+    fun getShopingItems(): ClothesResponse{
+        return ClothesResponse(shopingCartElements)
+    }
+
+    fun removeItem(clothes: Clothes){
+        shopingCartElements.remove(clothes)
     }
 
 

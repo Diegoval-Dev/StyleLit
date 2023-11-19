@@ -29,7 +29,7 @@ object routingPages {
     const val InitialPage = "Inicio"
     const val GPTSearch = "Busqueda"
     const val storesPages = "Tiendas"
-    const val favoritePages = "Destacados"
+    const val ShoppingCart = "ShoppingCart"
     const val configurationPages = "Configuracion"
     const val ClothesCards = "CardsClothes"
 }

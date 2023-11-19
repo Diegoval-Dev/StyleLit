@@ -1,5 +1,8 @@
 package com.uvg.stylelit.screens.auth
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,8 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,21 +40,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
-import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
-import okhttp3.internal.wait
-import androidx.compose.ui.res.vectorResource
-import com.example.laboratorio4.CommonLayout
-import com.example.laboratorio4.sidebarLeft
 import com.uvg.stylelit.navigation.NavigationState
-import com.uvg.stylelit.navigation.SetupNavigation
-import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.uvg.stylelit.ui.theme.StyleLitTheme
 
-//Inicio de sesión
+
 @Composable
 fun LoginPage(navController: NavController){
-    //Assets
+
     val Google =R.drawable.google
     var Facebook = R.drawable.facebook
     val ilustratorWelcome = R.drawable.fondo
@@ -61,21 +59,21 @@ fun LoginPage(navController: NavController){
     var google  = R.drawable.google
 
 
-    //inputs
+
     var email by remember { mutableStateOf(TextFieldValue()) }
     var password by remember { mutableStateOf(TextFieldValue()) }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF040E1D)), // Color de fondo de la pantalla
+            .background(Color(0xFF040E1D)),
         contentAlignment = Alignment.Center
     ) {
-        // Suponiendo que tienes un recurso SVG llamado "background_image"
+
         Image(
             painter = painterResource(id = fondoWelcome),
-            contentDescription = null, // Aquí podrías agregar una descripción para accesibilidad
-            contentScale = ContentScale.Crop,  // Esto se asegura de que la imagen cubra todo el espacio, recortando si es necesario
-            modifier = Modifier.fillMaxSize()  // Esto hará que la imagen llene toda la pantalla
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -185,7 +183,9 @@ fun LoginPage(navController: NavController){
                 Row {
                     Text(stringResource(R.string.no_tienes_una_cuenta), fontSize = 14.sp, color = Color.White, modifier = Modifier.padding(start = 2.dp))
                     Text(text = stringResource(R.string.crear), fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.White,
-                        modifier = Modifier.clickable { navController.navigate(NavigationState.Register.route)}.padding(start = 5.dp)
+                        modifier = Modifier
+                            .clickable { navController.navigate(NavigationState.Register.route) }
+                            .padding(start = 5.dp)
                     )
                 }
 

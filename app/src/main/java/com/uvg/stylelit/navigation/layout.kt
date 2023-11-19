@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Place
@@ -62,6 +63,7 @@ import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 import com.uvg.stylelit.ui.screens.MenuRutas.SearchGPTPage
+import com.uvg.stylelit.ui.screens.MenuRutas.ShopingScreen
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.DarkSlateBlue
@@ -111,10 +113,10 @@ fun sidebarLeft(){
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
         DrawerItem(Icons.Default.Search, routingPages.GPTSearch, "Busqueda por GPT"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryWomansPage, "Mujeres"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryMansPage, "Hombres"),
+        DrawerItem(Icons.Default.Face, routingPages.CategoryWomansPage, "Mujeres"),
+        DrawerItem(Icons.Default.Face, routingPages.CategoryMansPage, "Hombres"),
         DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
-        DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.ShoppingCart, "Carrito"),
         DrawerItem(Icons.Default.Settings, routingPages.configurationPages, "Configuración")
 
     )
@@ -185,9 +187,9 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(routingPages.favoritePages) {
+                composable(routingPages.ShoppingCart) {
                     CommonLayout(drawerState = drawerState) {
-                        "Pagina de destacados"
+                        ShopingScreen(navController = navController)
                     }
                 }
                 composable(routingPages.configurationPages){
@@ -242,7 +244,9 @@ fun sidebarLeft(){
 fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
     val coroutineScope = rememberCoroutineScope() // Obtener CoroutineScope
 
-    Column(modifier = Modifier.fillMaxSize().background(color = PrimaryColorBlue)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(color = PrimaryColorBlue)) {
         // Encabezado
         Row(
             modifier = Modifier
