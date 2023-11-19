@@ -1,6 +1,9 @@
 package com.uvg.stylelit.screens.auth
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -46,11 +49,70 @@ import com.uvg.stylelit.navigation.NavigationState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.uvg.stylelit.MainActivity
 import com.uvg.stylelit.ui.theme.StyleLitTheme
 
+class LoginActivity : ComponentActivity() {
+    private lateinit var auth: FirebaseAuth
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            StyleLitTheme {
+                LoginPage(
+                    onLoginClick = { email, password ->
+                    login(email, password)
+                },
+                    onSignUpnClick = {
+                        startActivity(Intent(this, SignUpActivity::class.java))
+                    })
+            }
+        }
+        auth = Firebase.auth
+    }
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            reload()
+        }
+    }
+    private fun reload() {
+        auth.currentUser!!.reload().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Sesion iniciada", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "No se pudo iniciar sesion", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
+    private fun login(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Sesion iniciada correctamente", Toast.LENGTH_SHORT).show()
+                    // val user = auth.currentUser
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(
+                        baseContext,
+                        "Sesion fallida",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+    }
+
+
+}
 @Composable
-fun LoginPage(navController: NavController){
+fun LoginPage(
+    onLoginClick: (email: String, password: String) -> Unit,
+    onSignUpnClick: () -> Unit,
+    ){
 
     val Google =R.drawable.google
     var Facebook = R.drawable.facebook
@@ -151,7 +213,7 @@ fun LoginPage(navController: NavController){
             }
             Spacer(modifier = Modifier.height(32.dp))
             MyButton(onClick = {
-                navController.navigate(NavigationState.Inicio.route)
+                onLoginClick(email.text, password.text)
             }) {
                 Text(stringResource(R.string.loginText), fontSize = 18.sp)
             }
@@ -184,7 +246,7 @@ fun LoginPage(navController: NavController){
                     Text(stringResource(R.string.no_tienes_una_cuenta), fontSize = 14.sp, color = Color.White, modifier = Modifier.padding(start = 2.dp))
                     Text(text = stringResource(R.string.crear), fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.White,
                         modifier = Modifier
-                            .clickable { navController.navigate(NavigationState.Register.route) }
+                            .clickable { onSignUpnClick() }
                             .padding(start = 5.dp)
                     )
                 }

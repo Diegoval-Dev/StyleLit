@@ -1,6 +1,8 @@
 package com.uvg.stylelit.navigation
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,7 +11,7 @@ import com.example.laboratorio4.CommonLayout
 import com.example.laboratorio4.sidebarLeft
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.screens.auth.RegisterPage
-import com.uvg.stylelit.screens.auth.welcomeScreen
+import com.uvg.stylelit.screens.auth.SignUpActivity
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
 //import com.uvg.stylelit.ui.screens.ClothsW
@@ -34,7 +36,7 @@ object routingPages {
     const val ClothesCards = "CardsClothes"
 }
 
-
+/*
 @Composable
 fun SetupNavigation() {
     val navController = rememberNavController();
@@ -46,18 +48,18 @@ fun SetupNavigation() {
                 welcomeScreen(navController)
             }
             composable(route = NavigationState.Login.route) {
-                LoginPage(navController)
+                LoginPage()
             }
             composable(route = NavigationState.Register.route) {
-                RegisterPage(navController)
+                startActivity(Intent(this, SignUpActivity::class.java))
             }
             composable(route = NavigationState.Inicio.route) {
                 sidebarLeft()
             }
-            /**composable(route = NavigationState.Cloth.route) {
+            composable(route = NavigationState.Cloth.route) {
                 Cloths(navController)
             }
-            **/
+
     }
 }
-
+*/

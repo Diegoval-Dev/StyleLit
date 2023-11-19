@@ -1,4 +1,10 @@
 package com.uvg.stylelit.screens.auth
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -45,11 +51,86 @@ import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
 import okhttp3.internal.wait
 import androidx.compose.ui.res.vectorResource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.uvg.stylelit.MainActivity
 import com.uvg.stylelit.navigation.NavigationState
+import com.uvg.stylelit.ui.theme.StyleLitTheme
+
+class SignUpActivity : ComponentActivity() {
+
+    private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            StyleLitTheme  {
+                RegisterPage(
+                    onSignUpnClick = { email, password ->
+                        signUp(email, password)
+                    }
+                )
+            }
+        }
+
+        auth = Firebase.auth
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            reload()
+        }
+    }
+
+    private fun reload() {
+        auth.currentUser!!.reload().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Reload successful! Hello ${auth.currentUser?.displayName}", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                Log.e(TAG, "reload", task.exception)
+                Toast.makeText(this, "Failed to reload user.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun signUp(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "createUserWithEmail:success")
+                    val user = auth.currentUser
+                    Toast.makeText(this, "Account created: ${auth.currentUser?.uid}", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+    }
+
+    companion object {
+        private const val TAG = "SignUpActivity"
+    }
+}
+
+
+
 
 //Inicio de sesión
 @Composable
-fun RegisterPage(navController: NavController){
+fun RegisterPage(onSignUpnClick: (email: String, password: String) -> Unit){
     //Assets
     val Google =R.drawable.google
     var Facebook = R.drawable.facebook
@@ -172,7 +253,7 @@ fun RegisterPage(navController: NavController){
 
             Spacer(modifier = Modifier.height(32.dp))
             MyButton(onClick = {
-                navController.navigate(routingPages.InitialPage)
+                onSignUpnClick(email.text, password.text)
             }) {
                 Text(stringResource(R.string.register), fontSize = 18.sp)
             }
@@ -203,15 +284,7 @@ fun RegisterPage(navController: NavController){
                         contentScale = ContentScale.Fit
                     )
                 }
-                Row {
-                    Text(stringResource(R.string.tienes_una_cuenta), fontSize = 14.sp, color = Color.White)
-                    Text(
-                        text = stringResource(R.string.loginText),
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.clickable{navController.navigate(NavigationState.Login.route)}.padding(start = 5.dp)
-                    )
-                }
+
 
             }
 
