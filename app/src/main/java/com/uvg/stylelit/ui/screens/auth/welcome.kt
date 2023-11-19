@@ -1,5 +1,9 @@
 package com.uvg.stylelit.screens.auth
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,17 +26,30 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.navigation.routingPages
 import com.uvg.stylelit.ui.theme.AtkinsonFont
 import com.uvg.stylelit.ui.theme.MyButton
+import com.uvg.stylelit.ui.theme.StyleLitTheme
 
+class WelcomeActivitie : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            StyleLitTheme {
+                WelcomeScreen()
+            }
+        }
+    }
+}
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun welcomeScreen(navController: NavController){
+fun WelcomeScreen(){
     val LoginPage = stringResource(R.string.loginText)
     val ilustratorWelcome = R.drawable.fondo
     val fondoWelcome = R.drawable.group_36
@@ -76,12 +93,23 @@ fun welcomeScreen(navController: NavController){
                 Image(painter = painterResource(id =ilustratorWelcome), contentDescription ="", modifier = Modifier.width(300.dp) )
 
                 Spacer(modifier = Modifier.height(32.dp))
-                MyButton(onClick = { navController.navigate(NavigationState.Login.route) }) {
+                val context = LocalContext.current
+                MyButton(
+                    onClick = {
+                        val intent = Intent(context, LoginActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                ) {
                     Text(stringResource(R.string.login), fontSize = 18.sp)
                 }
 
 
-                MyButton(onClick = {  navController.navigate(NavigationState.Register.route) }) {
+                MyButton(
+                    onClick = {
+                        val intent = Intent(context, SignUpActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                ) {
                     Text(stringResource(R.string.register),fontSize = 18.sp)
                 }
             }

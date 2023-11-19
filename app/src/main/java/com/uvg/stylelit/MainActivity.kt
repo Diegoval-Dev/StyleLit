@@ -9,9 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.laboratorio4.sidebarLeft
-import com.uvg.stylelit.navigation.SetupNavigation
 import com.uvg.stylelit.screens.auth.LoginPage
-import com.uvg.stylelit.screens.auth.welcomeScreen
 import com.uvg.stylelit.ui.theme.StyleLitTheme
 
 // MainActivity.kt
@@ -34,7 +32,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SetupNavigation()
+            sidebarLeft()
         }
     }
 
