@@ -42,6 +42,7 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
     }
     Column(
         modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.Start
     ) {
         Box(
             modifier = Modifier

@@ -42,9 +42,8 @@ fun ItemsBody(viewModel: ItemsVMWomen = viewModel(), navController: NavControlle
         viewModel.getClothes(category)
     }
     Column(
-        modifier = Modifier.fillMaxSize().fillMaxHeight(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.Start
     ) {
         Box(
             modifier = Modifier

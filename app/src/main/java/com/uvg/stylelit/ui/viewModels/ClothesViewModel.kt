@@ -26,6 +26,7 @@ class ClothesViewModel(private val repository: Repository = Repository()) : View
         ClothesUiState = ClothesUiState(emptyList(),loading = true)
 
         viewModelScope.launch {
+            Log.d("AAAAAAAA",repository.getClothes("Woman",category,cloth).clothes.toString())
             ClothesUiState = ClothesUiState(
                 cloth = repository.getClothes("Woman",category,cloth).clothes
             )

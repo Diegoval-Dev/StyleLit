@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -51,7 +52,7 @@ fun ClothBodyM(viewModel: ClothesViewModelMen = viewModel(), navController: NavC
         modifier = Modifier
             .fillMaxWidth()
             .width(50.dp)
-            .background(pinkcom),
+            .background(PrimaryColorBlue),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -64,21 +65,32 @@ fun ClothBodyM(viewModel: ClothesViewModelMen = viewModel(), navController: NavC
                 .width(150.dp)
         )
     }
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(15.dp),
-        modifier = Modifier
-            .fillMaxSize()
-            .background(PrimaryColorBlue)
-            .padding(1.dp)
-    ) {
-        items(viewModel.ClothesUiState.cloth) { cloth ->
-            ClothCard(
-                url = cloth.imageUrl,
-                marca = cloth.brand,
-                tallas = cloth.sizes,
-                precio = cloth.price,
-                colores = cloth.colors
-            )
+    if (viewModel.ClothesUiState.loading){
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            CircularProgressIndicator()
+        }
+    }else{
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(15.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(PrimaryColorBlue)
+                .padding(1.dp)
+        ) {
+            items(viewModel.ClothesUiState.cloth) { cloth ->
+                ClothCard(
+                    url = cloth.imageUrl,
+                    marca = cloth.brand,
+                    tallas = cloth.sizes,
+                    precio = cloth.price,
+                    colores = cloth.colors
+                )
+            }
         }
     }
+
 }

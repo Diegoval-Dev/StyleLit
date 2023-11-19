@@ -209,6 +209,7 @@ fun sidebarLeft(){
                         val category = backstackEntry.arguments?.getString("category")
                         val cloth = backstackEntry.arguments?.getString("cloth")
                         CommonLayout(drawerState = drawerState) {
+
                             ClothScreen(navController = navController, category = category ?: "", cloth = cloth?: "")
                         }
                     }
@@ -220,6 +221,7 @@ fun sidebarLeft(){
                         val category = backstackEntry.arguments?.getString("category")
                         val cloth = backstackEntry.arguments?.getString("cloth")
                         CommonLayout(drawerState = drawerState) {
+
                             ClothScreenM(navController = navController, category = category ?: "", cloth = cloth?: "")
                         }
                     }
