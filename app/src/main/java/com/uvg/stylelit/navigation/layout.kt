@@ -231,7 +231,7 @@ fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
                         .padding(top = 10.dp))
             }
             Text(
-                text = "StyLit",
+                text = "StyleLit",
                 color = White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight(600),
