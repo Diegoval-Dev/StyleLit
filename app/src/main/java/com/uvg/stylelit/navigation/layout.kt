@@ -56,6 +56,7 @@ import com.uvg.stylelit.navigation.routingPages
 
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
+import com.uvg.stylelit.ui.screens.CerrarScreen
 import com.uvg.stylelit.ui.screens.ClothScreen
 import com.uvg.stylelit.ui.screens.ClothScreenM
 
@@ -194,7 +195,7 @@ fun sidebarLeft(){
                 }
                 composable(routingPages.configurationPages){
                     CommonLayout(drawerState = drawerState) {
-                        "pagina de configuración"
+                        CerrarScreen(navController = navController)
                     }
                 }
 

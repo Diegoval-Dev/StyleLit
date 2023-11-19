@@ -83,7 +83,7 @@ class LoginActivity : ComponentActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                Toast.makeText(this, "No se pudo iniciar sesion", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No se pudo iniciar sesion: ${task.exception}", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -93,13 +93,12 @@ class LoginActivity : ComponentActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Sesion iniciada correctamente", Toast.LENGTH_SHORT).show()
-                    // val user = auth.currentUser
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
                     Toast.makeText(
                         baseContext,
-                        "Sesion fallida",
+                        "Sesion fallida: ${task.exception}",
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
@@ -169,7 +168,7 @@ fun LoginPage(
                         onValueChange = { email = it },
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = 12.dp),  // Ajusta este valor para centrar verticalmente el texto
+                            .padding(top = 12.dp),
                         textStyle = TextStyle(fontSize = 20.sp),
                         singleLine = true
                     )
@@ -196,7 +195,7 @@ fun LoginPage(
                         visualTransformation = PasswordVisualTransformation(),
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = 12.dp),  // Ajusta este valor para centrar verticalmente el texto
+                            .padding(top = 12.dp),
                         textStyle = TextStyle(fontSize = 20.sp),
                         singleLine = true
                     )
@@ -252,7 +251,6 @@ fun LoginPage(
                 }
 
             }
-
 
         }
     }

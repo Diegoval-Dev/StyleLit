@@ -79,7 +79,6 @@ class SignUpActivity : ComponentActivity() {
 
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
             reload()
@@ -89,12 +88,11 @@ class SignUpActivity : ComponentActivity() {
     private fun reload() {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(this, "Reload successful! Hello ${auth.currentUser?.displayName}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Sesion iniciada", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                Log.e(TAG, "reload", task.exception)
-                Toast.makeText(this, "Failed to reload user.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No se pudo iniciar sesion ${task.exception}", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -103,26 +101,20 @@ class SignUpActivity : ComponentActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
-                    Toast.makeText(this, "Account created: ${auth.currentUser?.uid}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
-                        "Authentication failed.",
+                        "No se creo la cuenta: ${task.exception}",
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
             }
     }
 
-    companion object {
-        private const val TAG = "SignUpActivity"
-    }
+
 }
 
 
@@ -146,15 +138,14 @@ fun RegisterPage(onSignUpnClick: (email: String, password: String) -> Unit){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF040E1D)), // Color de fondo de la pantalla
+            .background(Color(0xFF040E1D)),
         contentAlignment = Alignment.Center
     ) {
-        // Suponiendo que tienes un recurso SVG llamado "background_image"
         Image(
             painter = painterResource(id = fondoWelcome),
-            contentDescription = null, // Aquí podrías agregar una descripción para accesibilidad
-            contentScale = ContentScale.Crop,  // Esto se asegura de que la imagen cubra todo el espacio, recortando si es necesario
-            modifier = Modifier.fillMaxSize()  // Esto hará que la imagen llene toda la pantalla
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
