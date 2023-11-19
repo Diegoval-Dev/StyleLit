@@ -1,5 +1,6 @@
 package com.uvg.stylelit.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,10 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,9 +38,12 @@ fun ItemsScreenW(navController: NavController,category: String){
 
 @Composable
 fun ItemsBody(viewModel: ItemsVMWomen = viewModel(), navController: NavController, category: String) {
-    viewModel.getClothes()
+    if (viewModel.WItemsUiState.items.isEmpty()){
+        viewModel.getClothes(category)
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.Start
     ) {
         Box(
             modifier = Modifier
@@ -50,15 +56,25 @@ fun ItemsBody(viewModel: ItemsVMWomen = viewModel(), navController: NavControlle
         }
         TituloCategoriaSeparador(text = category, color = pinkcom)
 
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(all = 10.dp)
-        ) {
-            items(viewModel.WItemsUiState.items) { card ->
-                CardClothe(id = card.id, text = card.text) {
-                    navController.navigate("Cloths/${card.id}")
+        if(viewModel.WItemsUiState.loading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
+            }
+        }else{
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 160.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(all = 10.dp)
+            ) {
+                items(viewModel.WItemsUiState.items) { card ->
+                    CardClothe(url = card.urlImage, text = card.name) {
+                        navController.navigate("Cloths/${category}/${card.id}")
+                    }
                 }
             }
         }

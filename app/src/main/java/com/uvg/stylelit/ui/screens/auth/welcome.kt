@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -34,9 +36,12 @@ fun welcomeScreen(navController: NavController){
     val LoginPage = stringResource(R.string.loginText)
     val ilustratorWelcome = R.drawable.fondo
     val fondoWelcome = R.drawable.group_36
-        Box(
+    val scrollState = rememberScrollState()
+
+    Box(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(scrollState)
                 .background(Color(0xFF040E1D)), // Color de fondo de la pantalla
             contentAlignment = Alignment.Center
         ) {

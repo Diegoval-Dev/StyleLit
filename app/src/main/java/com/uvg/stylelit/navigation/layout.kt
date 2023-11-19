@@ -1,6 +1,7 @@
 package com.example.laboratorio4
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
@@ -22,9 +23,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.DrawerState
@@ -53,10 +56,14 @@ import com.uvg.stylelit.navigation.routingPages
 
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
-import com.uvg.stylelit.ui.screens.Cloths
+import com.uvg.stylelit.ui.screens.ClothScreen
+import com.uvg.stylelit.ui.screens.ClothScreenM
+
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
+import com.uvg.stylelit.ui.screens.MenuRutas.SearchGPTPage
+import com.uvg.stylelit.ui.screens.MenuRutas.ShopingScreen
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.DarkSlateBlue
@@ -105,9 +112,11 @@ fun sidebarLeft(){
     data class DrawerItem(val icon: ImageVector, val route: String, val label: String)
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        DrawerItem(Icons.Default.Search, routingPages.GPTSearch, "Busqueda por GPT"),
+        DrawerItem(Icons.Default.Face, routingPages.CategoryWomansPage, "Mujeres"),
+        DrawerItem(Icons.Default.Face, routingPages.CategoryMansPage, "Hombres"),
         DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
-        DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.ShoppingCart, "Carrito"),
         DrawerItem(Icons.Default.Settings, routingPages.configurationPages, "Configuración")
 
     )
@@ -153,11 +162,20 @@ fun sidebarLeft(){
                         MenuPage(navController = navController)
                     }
                 }
+                composable(routingPages.GPTSearch) {
+                    CommonLayout(drawerState) {
+                        SearchGPTPage(navController = navController)
+                    }
+                }
 
-                composable(routingPages.categoryPages) {
+                composable(routingPages.CategoryWomansPage) {
                     CommonLayout(drawerState) {
                         WomenCategoryScreen(navController)
-                        //MensCategoryScreen(navController)
+                    }
+                }
+                composable(routingPages.CategoryMansPage) {
+                    CommonLayout(drawerState) {
+                        MensCategoryScreen(navController)
                     }
                 }
 
@@ -169,9 +187,9 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(routingPages.favoritePages) {
+                composable(routingPages.ShoppingCart) {
                     CommonLayout(drawerState = drawerState) {
-                        "Pagina de destacados"
+                        ShopingScreen(navController = navController)
                     }
                 }
                 composable(routingPages.configurationPages){
@@ -182,17 +200,37 @@ fun sidebarLeft(){
 
                 composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
-                        ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
-                        //ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+                        ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+
+                    }
+                }
+
+                composable(route = NavigationState.ClothMe.route + "/{MensCategoryScreen}") { backstackEntry ->
+                    CommonLayout(drawerState = drawerState) {
+                        ItemsScreen(navController, backstackEntry.arguments?.getString("MensCategoryScreen") ?: "")
                     }
                 }
 
                 composable(
-                    route = "Cloths/{category}",
+                    route = "Cloths/{category}/{cloth}",
                     content = { backstackEntry ->
                         val category = backstackEntry.arguments?.getString("category")
+                        val cloth = backstackEntry.arguments?.getString("cloth")
                         CommonLayout(drawerState = drawerState) {
-                            Cloths(navController = navController, category = category ?: "")
+
+                            ClothScreen(navController = navController, category = category ?: "", cloth = cloth?: "")
+                        }
+                    }
+                )
+
+                composable(
+                    route = "ClothM/{category}/{cloth}",
+                    content = { backstackEntry ->
+                        val category = backstackEntry.arguments?.getString("category")
+                        val cloth = backstackEntry.arguments?.getString("cloth")
+                        CommonLayout(drawerState = drawerState) {
+
+                            ClothScreenM(navController = navController, category = category ?: "", cloth = cloth?: "")
                         }
                     }
                 )
@@ -206,7 +244,9 @@ fun sidebarLeft(){
 fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
     val coroutineScope = rememberCoroutineScope() // Obtener CoroutineScope
 
-    Column(modifier = Modifier.fillMaxSize().background(color = PrimaryColorBlue)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(color = PrimaryColorBlue)) {
         // Encabezado
         Row(
             modifier = Modifier
@@ -231,7 +271,7 @@ fun CommonLayout(drawerState: DrawerState, content: @Composable () -> Unit) {
                         .padding(top = 10.dp))
             }
             Text(
-                text = "StyLit",
+                text = "StyleLit",
                 color = White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight(600),

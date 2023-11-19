@@ -10,10 +10,9 @@ import com.example.laboratorio4.sidebarLeft
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.screens.auth.RegisterPage
 import com.uvg.stylelit.screens.auth.welcomeScreen
-import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
-import com.uvg.stylelit.ui.screens.Cloths
+//import com.uvg.stylelit.ui.screens.ClothsW
 
 //Aqui iran todas las pantallas que tendremos por separado
 object routingPages {
@@ -28,9 +27,9 @@ object routingPages {
     //Rutas par el sidebar
     const val layoutInitial = "Account"
     const val InitialPage = "Inicio"
-    const val categoryPages = "Categoria"
+    const val GPTSearch = "Busqueda"
     const val storesPages = "Tiendas"
-    const val favoritePages = "Destacados"
+    const val ShoppingCart = "ShoppingCart"
     const val configurationPages = "Configuracion"
     const val ClothesCards = "CardsClothes"
 }

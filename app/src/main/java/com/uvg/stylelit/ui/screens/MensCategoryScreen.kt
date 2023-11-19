@@ -22,7 +22,9 @@ import com.uvg.stylelit.ui.viewModels.MensCategoryViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uvg.stylelit.ui.components.ButtonCategory
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.ui.theme.DarkBlue
 
 @Composable
@@ -32,7 +34,9 @@ fun MensCategoryScreen(navController: NavController){
 
 @Composable
 fun MensCategoryScreenBody(viewModel: MensCategoryViewModel = viewModel(),navController: NavController) {
-    viewModel.getCategories()
+    if (viewModel.MensCategoryUiState.categories.isEmpty()){
+        viewModel.getCategories()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,13 +51,31 @@ fun MensCategoryScreenBody(viewModel: MensCategoryViewModel = viewModel(),navCon
         ) {
             TituloPrincipal(text = "MEN'S", color = Cyan)
         }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            items(viewModel.MensCategoryUiState.categories) { category->
-                ButtonCategory(text = category.name, color = DarkBlue, navController, category.name)
-                Divider(color = PrimaryColorBlue, thickness = 10.dp)
+        if (viewModel.MensCategoryUiState.loading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
+            }
+        }else{
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                items(viewModel.MensCategoryUiState.categories) { category->
+                    ButtonCategory(
+                        text = category.name,
+                        color = DarkBlue,
+                        navController = navController,
+                        onClick = {
+                            navController.navigate("${NavigationState.ClothMe.route}/${category.id}")
+                        },
+                        cloth = category.id
+                    )
+                    Divider(color = PrimaryColorBlue, thickness = 10.dp)
+                }
             }
         }
     }

@@ -1,65 +1,52 @@
-package com.uvg.stylelit.ui.screens
+package com.uvg.stylelit.ui.screens.MenuRutas
 
-import ClothesViewModel
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.uvg.stylelit.navigation.NavigationState
-import com.uvg.stylelit.ui.components.ButtonCategory
+import com.uvg.stylelit.ui.components.CartCard
 import com.uvg.stylelit.ui.components.ClothCard
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.pinkcom
-import com.uvg.stylelit.ui.viewModels.ItemsViewModel
 import com.uvg.stylelit.ui.viewModels.ShopingCartViewModel
 
-@Composable
-fun ClothScreen(navController: NavController, category: String ,cloth: String){
 
-    ClothBody(navController = navController, category = category, cloth = cloth)
-}
 @Composable
-fun ClothBody(viewModel: ClothesViewModel = viewModel(), navController: NavController, category: String ,cloth: String){
-    if(viewModel.ClothesUiState.cloth.isEmpty()){
-        viewModel.getData(category,cloth)
-    }
+fun ShopingScreen(navController: NavController){
+    ShopingBody(navController = navController)
+}
+
+@Composable
+fun ShopingBody(navController: NavController){
+    val viewModelShoppingCart: ShopingCartViewModel = viewModel()
+    viewModelShoppingCart.getCart()
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .width(50.dp)
-            .background(pinkcom),
+            .background(PrimaryColorBlue),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = cloth,
+            text = "Shopping Cart",
             color = Color.White,
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
@@ -68,14 +55,23 @@ fun ClothBody(viewModel: ClothesViewModel = viewModel(), navController: NavContr
                 .width(150.dp)
         )
     }
-    if (viewModel.ClothesUiState.loading){
+    if(viewModelShoppingCart.shoppingCartUiState.shopingItems.isEmpty()){
         Box(
             modifier = Modifier
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ){
-            CircularProgressIndicator()
+            Text(
+                text = "El carrito se encuentra vacio",
+                color = Color.White,
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .width(150.dp)
+            )
         }
+
     }else{
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(15.dp),
@@ -84,9 +80,10 @@ fun ClothBody(viewModel: ClothesViewModel = viewModel(), navController: NavContr
                 .background(PrimaryColorBlue)
                 .padding(1.dp)
         ) {
-            items(viewModel.ClothesUiState.cloth) { cloth ->
-                ClothCard(
-                    clothes = cloth
+            items(viewModelShoppingCart.shoppingCartUiState.shopingItems) { cloth ->
+                CartCard(
+                    clothes = cloth,
+                    viewModel = viewModelShoppingCart
                 )
             }
         }
