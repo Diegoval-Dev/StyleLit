@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.DrawerState
@@ -57,6 +58,7 @@ import com.uvg.stylelit.ui.screens.Cloths
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
+import com.uvg.stylelit.ui.screens.MenuRutas.SearchGPTPage
 import com.uvg.stylelit.ui.screens.WomenCategoryScreen
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.DarkSlateBlue
@@ -105,6 +107,7 @@ fun sidebarLeft(){
     data class DrawerItem(val icon: ImageVector, val route: String, val label: String)
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
+        DrawerItem(Icons.Default.Search, routingPages.GPTSearch, "Busqueda por GPT"),
         DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
         DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
         DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
@@ -151,6 +154,11 @@ fun sidebarLeft(){
                 composable(NavigationState.Inicio.route) {
                     CommonLayout(drawerState) {
                         MenuPage(navController = navController)
+                    }
+                }
+                composable(routingPages.GPTSearch) {
+                    CommonLayout(drawerState) {
+                        SearchGPTPage(navController = navController)
                     }
                 }
 

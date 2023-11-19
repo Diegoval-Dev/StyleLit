@@ -28,6 +28,7 @@ object routingPages {
     //Rutas par el sidebar
     const val layoutInitial = "Account"
     const val InitialPage = "Inicio"
+    const val GPTSearch = "Busqueda"
     const val categoryPages = "Categoria"
     const val storesPages = "Tiendas"
     const val favoritePages = "Destacados"
