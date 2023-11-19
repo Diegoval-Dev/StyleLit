@@ -1,6 +1,7 @@
 package com.uvg.stylelit.ui.screens
 
 import ClothesViewModel
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -32,14 +33,38 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.ui.components.ButtonCategory
+import com.uvg.stylelit.ui.components.ClothCard
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.pinkcom
+import com.uvg.stylelit.ui.viewModels.ItemsViewModel
 
 @Composable
-fun Cloths(navController: NavController, category: String) {
-    val viewModel: ClothesViewModel = viewModel()
-    val productDescriptions = viewModel.getProductDescriptions()
+fun ClothScreen(navController: NavController, category: String ,cloth: String){
 
+    ClothBody(navController = navController, category = category, cloth = cloth)
+}
+@Composable
+fun ClothBody(viewModel: ClothesViewModel = viewModel(), navController: NavController, category: String ,cloth: String){
+    if(viewModel.ClothesUiState.cloth.isEmpty()){
+        viewModel.getData(category,cloth)
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .width(50.dp)
+            .background(pinkcom),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = cloth,
+            color = Color.White,
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(8.dp)
+                .width(150.dp)
+        )
+    }
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(15.dp),
         modifier = Modifier
@@ -47,83 +72,14 @@ fun Cloths(navController: NavController, category: String) {
             .background(PrimaryColorBlue)
             .padding(1.dp)
     ) {
-        items(viewModel.ClothesUiState.categories) { category ->
-            ButtonCategory(
-                text = category,
-                color = pinkcom,
-                navController = navController,
-                onClick = {
-                    navController.navigate("${NavigationState.Cloth.route}/$category")
-                },
-                cloth = category
+        items(viewModel.ClothesUiState.cloth) { cloth ->
+            ClothCard(
+                url = cloth.imageUrl,
+                marca = cloth.brand,
+                tallas = cloth.sizes,
+                precio = cloth.price,
+                colores = cloth.colors
             )
-            Divider(color = PrimaryColorBlue, thickness = 10.dp)
-        }
-        item {
-            val headerInfo = viewModel.getHeaderInfo()
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .width(50.dp)
-                    .background(headerInfo.backgroundColor),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = headerInfo.title,
-                    color = headerInfo.textColor,
-                    fontSize = headerInfo.fontSize,
-                    fontWeight = headerInfo.fontWeight,
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .width(150.dp)
-                )
-            }
-        }
-        itemsIndexed(productDescriptions) { index, descriptionList ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Image(
-                    painter = painterResource(viewModel.imageCards[index % viewModel.imageCards.size]),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(150.dp)
-                        .background(MaterialTheme.colorScheme.background)
-                )
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
-                ) {
-                    for (description in descriptionList) {
-                        description.split("\n").forEach {
-                            Text(
-                                text = it,
-                                color = Color.White,
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Light
-                            )
-                        }
-                    }
-                }
-                IconButton(
-                    onClick = {
-                        // Acción al presionar el botón
-                    },
-                    modifier = Modifier.size(44.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(viewModel.carritoIcon),
-                        contentDescription = "Icono de compras",
-                        tint = Color.White,
-                        modifier = Modifier.size(53.dp)
-                    )
-                }
-            }
         }
     }
 }

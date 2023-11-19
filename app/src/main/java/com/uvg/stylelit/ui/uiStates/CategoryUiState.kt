@@ -2,8 +2,8 @@ package com.uvg.stylelit.ui.uiStates
 
 import com.uvg.stylelit.data.networking.CategoryResponse
 
-data class WomansCategoryUiState(
+data class CategoryUiState(
     //CategoryResponse
-    val categories: List<String>,
+    val categories: List<CategoryResponse>,
     val loading: Boolean = false
 )

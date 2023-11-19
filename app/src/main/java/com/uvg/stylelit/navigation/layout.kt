@@ -1,6 +1,7 @@
 package com.example.laboratorio4
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
@@ -53,8 +54,9 @@ import com.uvg.stylelit.navigation.routingPages
 
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
-import com.uvg.stylelit.ui.screens.Cloths
-import com.uvg.stylelit.ui.screens.ClothsM
+import com.uvg.stylelit.ui.screens.ClothScreen
+import com.uvg.stylelit.ui.screens.ClothScreenM
+
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
@@ -202,21 +204,23 @@ fun sidebarLeft(){
                 }
 
                 composable(
-                    route = "Cloths/{category}",
+                    route = "Cloths/{category}/{cloth}",
                     content = { backstackEntry ->
                         val category = backstackEntry.arguments?.getString("category")
+                        val cloth = backstackEntry.arguments?.getString("cloth")
                         CommonLayout(drawerState = drawerState) {
-                            Cloths(navController = navController, category = category ?: "")
+                            ClothScreen(navController = navController, category = category ?: "", cloth = cloth?: "")
                         }
                     }
                 )
 
                 composable(
-                    route = "ClothM/{category}",
+                    route = "ClothM/{category}/{cloth}",
                     content = { backstackEntry ->
                         val category = backstackEntry.arguments?.getString("category")
+                        val cloth = backstackEntry.arguments?.getString("cloth")
                         CommonLayout(drawerState = drawerState) {
-                            ClothsM(navController = navController, category = category ?: "")
+                            ClothScreenM(navController = navController, category = category ?: "", cloth = cloth?: "")
                         }
                     }
                 )

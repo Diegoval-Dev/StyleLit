@@ -21,6 +21,7 @@ import com.uvg.stylelit.ui.viewModels.WomenCategoryViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uvg.stylelit.ui.components.ButtonCategory
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.ui.theme.PinkW
@@ -33,7 +34,10 @@ fun WomenCategoryScreen(navController: NavController){
 
 @Composable
 fun WomenCategoryScreenBody(viewModel: WomenCategoryViewModel = viewModel(),navController: NavController) {
-    viewModel.getCategories()
+    if(viewModel.WomansCategoryUiState.categories.isEmpty()){
+        viewModel.getCategories()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,20 +52,30 @@ fun WomenCategoryScreenBody(viewModel: WomenCategoryViewModel = viewModel(),navC
         ) {
             TituloPrincipal(text = "WOMAN'S", color = PinkW)
         }
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            items(viewModel.WomansCategoryUiState.categories) { category ->
-                ButtonCategory(
-                    text = category,
-                    color = pinkcom,
-                    navController = navController,
-                    onClick = {
-                        navController.navigate("${NavigationState.Cloth.route}/${category}")
-                    },
-                    cloth = category
-                )
-                Divider(color = PrimaryColorBlue, thickness = 10.dp)
+        if (viewModel.WomansCategoryUiState.loading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
+            }
+        }else{
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(viewModel.WomansCategoryUiState.categories) { category ->
+                    ButtonCategory(
+                        text = category.name,
+                        color = pinkcom,
+                        navController = navController,
+                        onClick = {
+                            navController.navigate("${NavigationState.Cloth.route}/${category.name}")
+                        },
+                        cloth = category.id
+                    )
+                    Divider(color = PrimaryColorBlue, thickness = 10.dp)
+                }
             }
         }
     }

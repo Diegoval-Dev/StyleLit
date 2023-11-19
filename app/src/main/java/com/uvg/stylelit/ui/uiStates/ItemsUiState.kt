@@ -1,9 +1,9 @@
 package com.uvg.stylelit.ui.uiStates
 
-import com.uvg.stylelit.data.networking.Card
+import com.uvg.stylelit.data.networking.Cards
 
 data class ItemsUiState(
     //ClothResponse
-    val items: List<Card>,
+    val items: List<Cards>,
     val loading: Boolean = false
 )

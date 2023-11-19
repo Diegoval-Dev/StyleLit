@@ -6,23 +6,22 @@ import androidx.compose.runtime.setValue
 import com.uvg.stylelit.data.respository.Repository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uvg.stylelit.data.networking.CategoryResponse
-import com.uvg.stylelit.ui.uiStates.WomansCategoryUiState
+import com.uvg.stylelit.ui.uiStates.CategoryUiState
 import kotlinx.coroutines.launch
 
 class WomenCategoryViewModel(private val repository: Repository = Repository()): ViewModel() {
-    var WomansCategoryUiState by mutableStateOf(WomansCategoryUiState(emptyList()))
+    var WomansCategoryUiState by mutableStateOf(CategoryUiState(emptyList()))
         private set
 
-    val tempCategories: List<String> =  listOf("Camisas", "Pantalones",
+    /*val tempCategories: List<String> =  listOf("Camisas", "Pantalones",
         "Chaquetas & Abrigos", "Vestidos", "Faldas", "Ropa Deportiva",
-        "Ropa Interior", "Accesorios", "Ropa de baño")
+        "Ropa Interior", "Accesorios", "Ropa de baño")*/
     fun getCategories() {
-        WomansCategoryUiState = WomansCategoryUiState(emptyList(), loading = true)
+        WomansCategoryUiState = CategoryUiState(emptyList(), loading = true)
 
         viewModelScope.launch {
-            WomansCategoryUiState = WomansCategoryUiState(
-                categories = tempCategories
+            WomansCategoryUiState = CategoryUiState(
+                categories = repository.getCategories("Woman").categories
             )
         }
     }

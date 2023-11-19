@@ -70,7 +70,7 @@ fun MensCategoryScreenBody(viewModel: MensCategoryViewModel = viewModel(),navCon
                         color = DarkBlue,
                         navController = navController,
                         onClick = {
-                            navController.navigate("${NavigationState.ClothMe.route}/$category")
+                            navController.navigate("${NavigationState.ClothMe.route}/${category.id}")
                         },
                         cloth = category.id
                     )
