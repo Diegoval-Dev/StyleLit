@@ -28,13 +28,13 @@ import com.uvg.stylelit.ui.theme.StyleLitTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ButtonCategory( text: String, color: Color, navController: NavController, cloth: String){
+fun ButtonCategory( text: String, color: Color, navController: NavController, cloth: String, onClick: () -> Unit){
     Card(
         shape = RoundedCornerShape(1.dp),
         modifier = Modifier
             .fillMaxWidth()
             .height(51.dp),
-        onClick = {  navController.navigate("${NavigationState.Cloth.route}/${cloth}")}
+        onClick = onClick
     ) {
         Box(
             modifier = Modifier

@@ -26,7 +26,7 @@ fun TituloPrincipal(text: String, color: Color) {
             fontFamily = FontFamily.SansSerif
         ),
         modifier = Modifier
-            .width(250.dp)
+            .width(220.dp)
             .height(50.dp)
             .offset(13.dp, 1.dp)
     )
@@ -39,7 +39,7 @@ fun TituloPrincipal(text: String, color: Color) {
             color = color
         ),
         modifier = Modifier
-            .width(250.dp)
+            .width(220.dp)
             .height(50.dp)
             .offset(12.dp, 1.dp)
     )
@@ -52,7 +52,49 @@ fun TituloPrincipal(text: String, color: Color) {
             color = White,
         ),
         modifier = Modifier
-            .width(250.dp)
+            .width(220.dp)
+            .height(50.dp)
+            .offset(10.dp, 1.dp)
+    )
+}
+
+@Composable
+fun TituloPrincipalMen(text: String, color: Color) {
+    Text(
+        text = text,
+        style = TextStyle(
+            fontSize = 40.sp,
+            color = White,
+            fontFamily = FontFamily.SansSerif
+        ),
+        modifier = Modifier
+            .width(145.dp)
+            .height(50.dp)
+            .offset(13.dp, 1.dp)
+    )
+
+    Text(
+        text = text,
+        style = TextStyle(
+            fontFamily = FontFamily.SansSerif,
+            fontSize = 40.sp,
+            color = color
+        ),
+        modifier = Modifier
+            .width(145.dp)
+            .height(50.dp)
+            .offset(12.dp, 1.dp)
+    )
+
+    Text(
+        text = text,
+        style = TextStyle(
+            fontFamily = FontFamily.SansSerif,
+            fontSize = 40.sp,
+            color = White,
+        ),
+        modifier = Modifier
+            .width(145.dp)
             .height(50.dp)
             .offset(10.dp, 1.dp)
     )

@@ -1,6 +1,7 @@
 package com.example.laboratorio4
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
@@ -54,7 +55,9 @@ import com.uvg.stylelit.navigation.routingPages
 
 import com.uvg.stylelit.screens.ItemsScreen
 import com.uvg.stylelit.screens.auth.LoginPage
-import com.uvg.stylelit.ui.screens.Cloths
+import com.uvg.stylelit.ui.screens.ClothScreen
+import com.uvg.stylelit.ui.screens.ClothScreenM
+
 import com.uvg.stylelit.ui.screens.ItemsScreenW
 import com.uvg.stylelit.ui.screens.MensCategoryScreen
 import com.uvg.stylelit.ui.screens.MenuRutas.MenuPage
@@ -108,7 +111,8 @@ fun sidebarLeft(){
     val items = listOf(
         DrawerItem(Icons.Default.Home, routingPages.InitialPage, "Inicio"),
         DrawerItem(Icons.Default.Search, routingPages.GPTSearch, "Busqueda por GPT"),
-        DrawerItem(Icons.Default.ShoppingCart, routingPages.categoryPages, "Categorías"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryWomansPage, "Mujeres"),
+        DrawerItem(Icons.Default.ShoppingCart, routingPages.CategoryMansPage, "Hombres"),
         DrawerItem(Icons.Default.Place, routingPages.storesPages, "Tiendas"),
         DrawerItem(Icons.Default.Favorite, routingPages.favoritePages, "Destacados"),
         DrawerItem(Icons.Default.Settings, routingPages.configurationPages, "Configuración")
@@ -162,10 +166,14 @@ fun sidebarLeft(){
                     }
                 }
 
-                composable(routingPages.categoryPages) {
+                composable(routingPages.CategoryWomansPage) {
                     CommonLayout(drawerState) {
                         WomenCategoryScreen(navController)
-                        //MensCategoryScreen(navController)
+                    }
+                }
+                composable(routingPages.CategoryMansPage) {
+                    CommonLayout(drawerState) {
+                        MensCategoryScreen(navController)
                     }
                 }
 
@@ -190,17 +198,37 @@ fun sidebarLeft(){
 
                 composable(route = NavigationState.Cloth.route + "/{WomenCategoryScreen}") { backstackEntry ->
                     CommonLayout(drawerState = drawerState) {
-                        ItemsScreen(navController, backstackEntry.arguments?.getString("category") ?: "")
-                        //ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+                        ItemsScreenW(navController, backstackEntry.arguments?.getString("WomenCategoryScreen") ?: "")
+
+                    }
+                }
+
+                composable(route = NavigationState.ClothMe.route + "/{MensCategoryScreen}") { backstackEntry ->
+                    CommonLayout(drawerState = drawerState) {
+                        ItemsScreen(navController, backstackEntry.arguments?.getString("MensCategoryScreen") ?: "")
                     }
                 }
 
                 composable(
-                    route = "Cloths/{category}",
+                    route = "Cloths/{category}/{cloth}",
                     content = { backstackEntry ->
                         val category = backstackEntry.arguments?.getString("category")
+                        val cloth = backstackEntry.arguments?.getString("cloth")
                         CommonLayout(drawerState = drawerState) {
-                            Cloths(navController = navController, category = category ?: "")
+
+                            ClothScreen(navController = navController, category = category ?: "", cloth = cloth?: "")
+                        }
+                    }
+                )
+
+                composable(
+                    route = "ClothM/{category}/{cloth}",
+                    content = { backstackEntry ->
+                        val category = backstackEntry.arguments?.getString("category")
+                        val cloth = backstackEntry.arguments?.getString("cloth")
+                        CommonLayout(drawerState = drawerState) {
+
+                            ClothScreenM(navController = navController, category = category ?: "", cloth = cloth?: "")
                         }
                     }
                 )

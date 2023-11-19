@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.uvg.stylelit.ui.theme.StyleLitTheme
 import com.uvg.stylelit.R
 import com.uvg.stylelit.ui.theme.DarkSlateBlue
@@ -37,8 +38,7 @@ import com.uvg.stylelit.ui.theme.White
  * @param text El texto que se mostrará en la tarjeta.
  */
 @Composable
-fun CardClothe(@DrawableRes id: Int, text: String, onClick: () -> Unit){
-    val image = painterResource(id = id)
+fun CardClothe(url: String, text: String, onClick: () -> Unit){
     Card (
         modifier = Modifier.clickable(onClick = onClick)
     ){
@@ -46,12 +46,13 @@ fun CardClothe(@DrawableRes id: Int, text: String, onClick: () -> Unit){
             modifier = Modifier
                 .height(160.dp)
         ){
-            Image(
-                painter = image,
+            AsyncImage(
+                model = url,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(R.drawable.placeholderimage)
             )
             Box(
                 modifier = Modifier
@@ -76,11 +77,3 @@ fun CardClothe(@DrawableRes id: Int, text: String, onClick: () -> Unit){
     }
 }
 
-@Preview
-@Composable
-fun Preview() {
-    StyleLitTheme {
-        CardClothe(id = R.drawable.ic_launcher_background, text = "Prueba"){
-        }
-    }
-}

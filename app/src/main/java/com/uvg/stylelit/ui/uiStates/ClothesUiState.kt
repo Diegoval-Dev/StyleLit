@@ -1,7 +1,8 @@
 package com.uvg.stylelit.ui.uiStates
-import com.uvg.stylelit.data.networking.Card
+
+import com.uvg.stylelit.data.networking.Clothes
 
 data class ClothesUiState(
-    val categories: List<String>,
+    val cloth: List<Clothes>,
     val loading: Boolean = false
 )

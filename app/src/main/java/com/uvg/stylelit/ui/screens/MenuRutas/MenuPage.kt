@@ -100,7 +100,6 @@ fun ImageCard(painter: Painter, width: Dp, ) {
     )
 }
 
-
 @Composable
 fun btnCategories(){
     Card (
@@ -192,3 +191,4 @@ fun CardWidget( backgroundColorRes: Int, // Recurso de color para el fondo
         }
     }
 }
+

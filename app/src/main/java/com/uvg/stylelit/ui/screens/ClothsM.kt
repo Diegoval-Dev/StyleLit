@@ -1,7 +1,6 @@
 package com.uvg.stylelit.ui.screens
 
-import ClothesViewModel
-import android.util.Log
+import ClothesViewModelMen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,25 +34,25 @@ import androidx.navigation.NavController
 import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.ui.components.ButtonCategory
 import com.uvg.stylelit.ui.components.ClothCard
+import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
 import com.uvg.stylelit.ui.theme.pinkcom
-import com.uvg.stylelit.ui.viewModels.ItemsViewModel
 
 @Composable
-fun ClothScreen(navController: NavController, category: String ,cloth: String){
+fun ClothScreenM(navController: NavController, category: String ,cloth: String){
 
-    ClothBody(navController = navController, category = category, cloth = cloth)
+    ClothBodyM(navController = navController, category = category, cloth = cloth)
 }
 @Composable
-fun ClothBody(viewModel: ClothesViewModel = viewModel(), navController: NavController, category: String ,cloth: String){
+fun ClothBodyM(viewModel: ClothesViewModelMen = viewModel(), navController: NavController, category: String, cloth: String){
     if(viewModel.ClothesUiState.cloth.isEmpty()){
-        viewModel.getData(category,cloth)
+        viewModel.getDataM(category,cloth)
     }
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .width(50.dp)
-            .background(pinkcom),
+            .background(PrimaryColorBlue),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -93,4 +92,5 @@ fun ClothBody(viewModel: ClothesViewModel = viewModel(), navController: NavContr
             }
         }
     }
+
 }

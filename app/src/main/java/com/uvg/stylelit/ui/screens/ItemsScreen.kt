@@ -13,22 +13,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.uvg.stylelit.R
 import com.uvg.stylelit.components.CardClothe
 import com.uvg.stylelit.components.TituloCategoriaSeparador
 import com.uvg.stylelit.components.TituloPrincipal
-import com.uvg.stylelit.data.networking.Card
+import com.uvg.stylelit.components.TituloPrincipalMen
 import com.uvg.stylelit.ui.theme.Cyan
 import com.uvg.stylelit.ui.theme.DarkBlue
 import com.uvg.stylelit.ui.theme.PrimaryColorBlue
-import com.uvg.stylelit.ui.theme.StyleLitTheme
 import com.uvg.stylelit.ui.viewModels.ItemsViewModel
 
 
@@ -39,9 +37,12 @@ fun ItemsScreen(navController: NavController,category: String){
 
 @Composable
 fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavController, category: String) {
-    viewModel.getClothes()
+    if(viewModel.ItemsUiState.items.isEmpty()){
+        viewModel.getClothes(category)
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.Start
     ) {
         Box(
             modifier = Modifier
@@ -50,18 +51,29 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
                 .padding(top = 5.dp, bottom = 10.dp),
             contentAlignment = Alignment.Center
         ) {
-            TituloPrincipal(text = "MEN'S", color = Cyan)
+            TituloPrincipalMen(text = "MEN'S", color = Cyan)
         }
         TituloCategoriaSeparador(text = category, color = DarkBlue)
 
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 160.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(all = 10.dp)
-        ) {
-            items(viewModel.ItemsUiState.items) { card ->
-                CardClothe(id = card.id, text = card.text) {
+        if(viewModel.ItemsUiState.loading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
+            }
+        }else{
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 160.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(all = 10.dp)
+            ) {
+                items(viewModel.ItemsUiState.items) { card ->
+                    CardClothe(url = card.urlImage, text = card.name) {
+                        navController.navigate("ClothM/${category}/${card.id}")
+                    }
                 }
             }
         }
@@ -73,7 +85,3 @@ fun ItemsBody(viewModel: ItemsViewModel = viewModel(), navController: NavControl
         )
     }
 }
-
-
-
-
