@@ -1,5 +1,6 @@
 package com.uvg.stylelit.ui.screens.MenuRutas
 
+import OpenIaViewModel
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +16,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -27,16 +30,26 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uvg.stylelit.R
-import com.uvg.stylelit.ui.viewModels.openAIApiViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchGPTPage(navController: NavController){
+    val viewModel: OpenIaViewModel = viewModel()
+
     val scrollState = rememberScrollState()
     val textState = remember { mutableStateOf("") }
-    val viewModel: openAIApiViewModel = viewModel()
-    val clothesList by viewModel.clothes.observeAsState(initial = listOf())
+    var query by remember { mutableStateOf("") }
+    val response by viewModel.response.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+
+    //val viewModel: openAIApiViewModel = viewModel()
+    //val clothesList by viewModel.clothes.observeAsState(initial = listOf())
 
     Column( modifier = Modifier
         .fillMaxSize()
@@ -47,7 +60,7 @@ fun SearchGPTPage(navController: NavController){
     )
     {
         Text(text = "Ingresa el prompt:", modifier = Modifier.padding(vertical = 20.dp, horizontal = 30.dp), color = Color.White)
-        OutlinedTextField(
+        /*OutlinedTextField(
             value = textState.value,
             onValueChange = { textState.value = it },
             placeholder = { Text("Buscar", color = Color.Gray) },
@@ -66,15 +79,25 @@ fun SearchGPTPage(navController: NavController){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp)
+        )*/
+        TextField(
+            value = query,
+            onValueChange = { query = it },
+            label = { Text("Pregunta a ChatGPT") }
         )
-        Button(onClick = { viewModel.searchWithChatGPT(textState.value) }) {
-            Text("Buscar")
+        Button(onClick = {
+            coroutineScope.launch {
+                viewModel.sendMessageToChatGPT(query)
+            }
+        }) {
+            Text("Enviar")
         }
-        LazyColumn {
+        Text(text = response, color = Color.White)
+        /*LazyColumn {
             items(clothesList) { Clothes ->
                 Text(Clothes.name)
             }
-        }
+        }*/
 
 
     }

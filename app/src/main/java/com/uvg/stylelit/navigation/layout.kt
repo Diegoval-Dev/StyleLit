@@ -160,7 +160,7 @@ fun sidebarLeft(){
                 }
                 composable(routingPages.GPTSearch) {
                     CommonLayout(drawerState) {
-                        SearchGPTPage(navController = navController)
+                        SearchGPTPage(navController = navController, )
                     }
                 }
 

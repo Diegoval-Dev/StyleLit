@@ -84,5 +84,11 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation ("io.ktor:ktor-client-core:2.3.0")
+    implementation ("io.ktor:ktor-client-cio:2.3.0")
+    implementation ("io.ktor:ktor-client-serialization:2.3.0")
+
+    // kotlinx.serialization para JSON
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
 
 }
