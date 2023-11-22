@@ -1,7 +1,6 @@
 package com.example.laboratorio4
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
@@ -55,6 +54,7 @@ import com.uvg.stylelit.navigation.NavigationState
 import com.uvg.stylelit.navigation.routingPages
 
 import com.uvg.stylelit.screens.ItemsScreen
+
 import com.uvg.stylelit.screens.auth.LoginPage
 import com.uvg.stylelit.ui.screens.CerrarScreen
 import com.uvg.stylelit.ui.screens.ClothScreen
@@ -165,7 +165,7 @@ fun sidebarLeft(){
                 }
                 composable(routingPages.GPTSearch) {
                     CommonLayout(drawerState) {
-                        SearchGPTPage(navController = navController)
+                        SearchGPTPage(navController = navController, )
                     }
                 }
 
